@@ -1,0 +1,52 @@
+version: '3.5'
+services:
+    # Load Balancer (NginX)
+    wetbat_lb:
+        container_name: 'wetbat-lb'
+        image: wetbat-lb:latest
+        restart: always
+        volumes: 
+            - './load-balancer/certs:/etc/letsencrypt'
+        depends_on: 
+            - 'wetbat_portal'
+        build:
+          context: ./load-balancer/
+        ports:
+          - '80:80'
+          - '443:443'
+    # Database (MySQL)
+    wetbat_db:
+        container_name: 'wetbat-db'
+        image: wetbat-db:latest
+        build:
+            context: ./database/
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+        - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASS}
+            MYSQL_DATABASE: ${DB_NAME}
+    # Main API / Portal for wetbat (React / Express)
+    wetbat_portal:
+        container_name: 'wetbat-portal'
+        image: wetbat:latest
+        restart: always
+        build:
+            context: ./server/
+        depends_on: 
+            - 'wetbat_db'
+        ports:
+        - '8081:8081'
+        environment:
+            PORT: 8081
+            DB_HOST: ${DB_HOST}
+            DB_USER: ${DB_USER}
+            DB_PASS: ${DB_PASS}
+            DB_NAME: ${DB_NAME}
+# Network to Communicate
+networks:
+    default:
+        name: wetbat-network
