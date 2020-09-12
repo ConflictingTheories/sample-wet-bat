@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           	Sample - Wet Bat PoC     	      **
+**         	Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -56,7 +56,7 @@ async function handleResponse(response:Response) {
     return response.text().then(async text => {
         if (response.status === 401) {
             // auto logout if 401 response returned from api
-            if(location && (location.pathname == "/login" || location.pathname == "/logout")){
+            if(location && (location.pathname === "/login" || location.pathname === "/logout")){
                 await logout();
             }else{
                 await logout();

@@ -1,7 +1,7 @@
 FROM ubuntu
 # Env Variables
 ENV API_HOST="${API_HOST}"
-ENV API_VERSION="${API_VERSION}""
+ENV API_VERSION="${API_VERSION}"
 ENV API_ROUTE_PATH="${API_ROUTE_PATH}"
 ENV APP_PORT=${PORT}
 ENV DB_USER="${DB_USER}"
@@ -23,7 +23,6 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update -y && apt-get install -y yarn
 # Build Source
 RUN yarn && yarn build
-RUN dos2unix *.sh
 # Expose Ports
 EXPOSE 8081
 # Start when Container Opens

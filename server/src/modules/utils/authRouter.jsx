@@ -16,7 +16,7 @@ import React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 // Authenticator
-import Authenticator from '../../helper/authHelper'
+import Authenticator from '../../helpers/authHelper'
 
 // Wrapper for Router
 export const AuthenticatedRoute = ({component,...rest}) =>{

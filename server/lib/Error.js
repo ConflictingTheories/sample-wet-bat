@@ -1,20 +1,32 @@
-// ============================
-// Javascript Design Patterns
-// ============================
-// Copyright (c) Kyle Derby MacInnis
+/*                                            *\
+** ------------------------------------------ **
+**         	Sample - Wet Bat PoC     	      **
+** ------------------------------------------ **
+**  Copyright (c) 2020 - Kyle Derby MacInnis  **
+**                                            **
+** Any unauthorized distribution or transfer  **
+**    of this work is strictly prohibited.    **
+**                                            **
+**           All Rights Reserved.             **
+** ------------------------------------------ **
+\*                                            */
 
 // Main Patterns Object
 const Error = function() {
+    
     var errorStack = [];
+    
     // Add Error To Stack
     function pushError(err) {
         errorStack.push(err);
         return errorStack.length;
     }
+    
     // Return Error Stack
     function getErrorStack() {
         return errorStack;
     }
+    
     // Format Error Object
     function formatError(msg, status, data) {
         return {
@@ -23,16 +35,19 @@ const Error = function() {
             err: data
         };
     }
+    
     // Global Function
     function setError(msg, status, data) {
         return pushError(formatError(msg, status, data));
     }
+    
     // Clear and Return Error Stack
     function clrError() {
         let ret = getErrorStack();
         errorStack = [];
         return ret;
     }
+    
     // Boolean has errors
     function isErrored() {
         if (errorStack.length > 0) {
@@ -41,6 +56,7 @@ const Error = function() {
             return false
         }
     }
+    
     // Send Error to Front
     function sendError(res) {
         let errArr = clrError();
@@ -55,6 +71,7 @@ const Error = function() {
         // Return Error
         res.status(status).send(msg.join(""));
     }
+    
     // Return Object
     return {
         setError: setError,

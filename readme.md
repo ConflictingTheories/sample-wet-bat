@@ -21,6 +21,6 @@ Please run the following:
 ## Usage
 Once the deployment has finished, it should if successful, now be running and accessible from your Browser:
 
-        http://localhost:8081/
+        http://localhost/
 
-
+__Note__: Also exposed via the default port: `8081`

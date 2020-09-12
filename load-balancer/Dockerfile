@@ -1,8 +1,8 @@
 FROM nginx:alpine
 # Install LetsEncrypt (SSL)
 RUN apk add python3 python3-dev build-base libressl-dev musl-dev libffi-dev
-RUN pip3 install pip --upgrade
-RUN pip3 install certbot-nginx
+RUN pip install pip --upgrade
+RUN pip install certbot-nginx
 RUN mkdir /etc/letsencrypt
 # Add Configuration for nginx
 ADD ./nginx.conf /etc/nginx/nginx.conf

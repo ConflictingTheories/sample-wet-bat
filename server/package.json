@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/node": "^14.10.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -15,9 +16,11 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-recollect": "^5.2.3",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "rsuite": "^4.8.2",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "typescript": "^4.0.2"
   },
   "scripts": {
     "start-linux": "bash ./scripts/start.sh",

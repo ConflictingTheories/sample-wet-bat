@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**      	Sample - Wet Bat PoC     	      **
+**          	Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -31,7 +31,6 @@ const index = require("../routes/index")(DB);
 // ---- API CODE BELOW ----
 
 // REQUEST HANDLER OPTIONS
-app.set("view engine", "ejs");
 app.use(
   session({
     secret: "WETBAT2020",
@@ -67,7 +66,7 @@ app.use("/api/:ver", (req, res) => {
 });
 
 // === STATIC FILES
-// Angular + Scripts
+// React + Scripts
 app.use("/static", express.static(__dirname + "/../build"));
 // === INDEX FILE + SPA APP
 app.use("/", index);

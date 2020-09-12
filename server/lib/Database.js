@@ -11,7 +11,7 @@
 ** ------------------------------------------ **
 \*                                            */
 
-import { Sequelize } from "sequelize";
+const Sequelize = require("sequelize");
 
 // Connection to Database (SQL ORM)
 const DB = new Sequelize({
@@ -23,5 +23,4 @@ const DB = new Sequelize({
   dialect: "mysql",
 });
 
-export default DB;
 module.exports = DB;
