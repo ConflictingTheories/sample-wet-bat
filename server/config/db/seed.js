@@ -11,20 +11,22 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const cryptoUtils = require('../lib/Crypto');
-const DB = require('../lib/Database');
-// Seed DB
-module.exports = () => {
-  // Users
-  (async () => {
-    await DB.sync();
-    const saltedPass = cryptoUtils.saltHashPassword('password')
-    const jane = await User.create({
-      username: "janedoe",
-      password: saltedPass.passwordHash,
-      salt: saltedPass.salt
-    });
-    console.log(jane.toJSON());
-  })();
-  
-};
+const fs = require("fs");
+const path = require("path");
+const DB = require("../../lib/Database");
+
+// Run
+module.exports = (() => {
+  const _DB = DB.getQueryInterface();
+  // Run Migrations in Order of Name (Date)
+  fs.readdir(path.join(__dirname, "seeds"), (err, files) => {
+    if (err) console.error(err);
+    else
+      files
+        .sort((a, b) => b - a)
+        .map(async (file) => {
+          // Run seed()
+          await require(path.join(__dirname, "seeds", file))(DB).seed();
+        });
+  });
+})();

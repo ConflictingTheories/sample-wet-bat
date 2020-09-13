@@ -15,17 +15,28 @@ import React from "react";
 import { collect } from "react-recollect";
 
 // RSuite UI Library
-import { Container, Content, Row, Col } from "rsuite";
+import { Container, Content, Row, Col, Notification, Placeholder } from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
-// Components
+// BLUEPRINT STYLES
+import {
+  Button,
+  Tabs,
+  Tab,
+  NonIdealState,
+  Intent,
+  Callout,
+} from "@blueprintjs/core";
+import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
+import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+
 import NavBar from "../../components/nav";
 import SideMenu from "../../components/menu";
 
 // ASSETS & APP STYLES
 import "../../styles/App.css";
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+const { Paragraph } = Placeholder
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -36,34 +47,53 @@ class Dashboard extends React.Component {
     this.state = {};
   }
 
-  renderDashboardTabs() {}
+  renderDashboardTabs() {
+    return (
+      <React.Fragment>
+        <Callout intent={Intent.SUCCESS} title={"Wet Bat Loaded"}></Callout>
+      </React.Fragment>
+    );
+  }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    // Provide example "Notification"
+    setTimeout(
+      () =>
+        Notification.open({
+          title: ~~(Math.random() * 20) + " new tours available",
+          description: <Paragraph width={320} rows={3} />,
+        }),
+      ~~(Math.random() * 10000)
+    );
+  }
 
   render() {
     return (
-      <Row>
-        <Col>
-          <SideMenu
-            activeKey={"1"}
-            style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
-          />
-        </Col>
-        <Col>
-          <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
-            <Container>
-              <NavBar
-                isLogin={false}
-                renderBrand={this.renderClientSelect}
-                renderBar={() => null}
-                renderRight={() => null}
-              />
-              <Content>{this.renderDashboardTabs()}</Content>
-            </Container>
-          </div>
-          {/* MEETING sidebar */}
-        </Col>
-      </Row>
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "row",
+          minHeight: "100vh",
+        }}
+      >
+        <SideMenu
+          activeKey={"1"}
+          style={{ flex: 1, flexShrink: 1, flexGrow: 0 }}
+        />
+        <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
+          <Container>
+            <NavBar
+              isLogin={false}
+              renderBrand={this.renderClientSelect}
+              renderBar={() => null}
+              renderRight={() => null}
+            />
+            <Content>{this.renderDashboardTabs()}</Content>
+          </Container>
+        </div>
+        {/* MEETING sidebar */}
+      </div>
     );
   }
 }

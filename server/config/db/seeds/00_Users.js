@@ -11,21 +11,20 @@
 ** ------------------------------------------ **
 \*                                            */
 
-// Third-party Libraries
-const express = require("express");
-const path = require("path");
-const router = express.Router({ mergeParams: true });
+const { DataTypes } = require("sequelize");
 
-module.exports = function (_) {
-  router.get("/", function (_, res) {
-    res.sendFile(path.join(__dirname, "../build/", "index.html"));
-  });
-
-  router.get("/index", function (_, res) {
-    res.sendFile(path.join(__dirname, "../build/", "index.html"));
-  });
-
-  router.use("*", express.static(__dirname + "/../build"));
-
-  return router;
+module.exports = (DB) => {
+  const _DB = DB.getQueryInterface();
+  return {
+    seed: async () => {
+      await DB.sync();
+      const saltedPass = cryptoUtils.saltHashPassword("password");
+      const jane = await User.create({
+        username: "janedoe",
+        password: saltedPass.passwordHash,
+        salt: saltedPass.salt,
+      });
+      console.log(jane.toJSON());
+    },
+  };
 };

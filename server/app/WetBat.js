@@ -65,10 +65,10 @@ app.use("/api/:ver", (req, res) => {
   }
 });
 
-// === STATIC FILES
-// React + Scripts
-app.use("/static", express.static(__dirname + "/../build"));
-// === INDEX FILE + SPA APP
+// === STATIC Files
+app.use("/static", express.static(__dirname + "/../build/static"));
+
+// === WEB ROUTE
 app.use("/", index);
 
 // LISTEN ON PORT
@@ -86,7 +86,6 @@ process.on("uncaughtException", function (e) {
       input: process.stdin,
       output: process.stdout,
     });
-
     rl.question(
       "PORT IN USE: Please select a different port (3000+)? ",
       (answer) => {

@@ -11,12 +11,12 @@
 ** ------------------------------------------ **
 \*                                            */
 
-var express = require('express');
-var router = express.Router({
+const express = require('express');
+const router = express.Router({
     mergeParams: true
 });
 
-module.exports = () => {
+module.exports = (DB) => {
 
     // GET /auth  (TODO -- Add Middleware)
     router.get('/', (req, res) => {
