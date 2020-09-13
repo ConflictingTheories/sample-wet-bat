@@ -41,7 +41,7 @@ import "rsuite/dist/styles/rsuite-dark.css";
 import Logo from "../../assets/logo.svg";
 
 // Styles
-import "../../styles/App.css";
+import "../../styles/App.less";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
