@@ -19,8 +19,8 @@ import { Container, Content, Row, Col } from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
 // Components
-import NavBar from "../components/nav";
-import SideMenu from "../components/menu";
+import NavBar from "../../components/nav";
+import SideMenu from "../../components/menu";
 
 // ASSETS & APP STYLES
 import "../../styles/App.css";
