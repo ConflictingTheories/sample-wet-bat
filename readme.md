@@ -8,6 +8,8 @@ The Following Technologies are required to run and deploy Wet Bat:
 ## Deployment
 Please see the following instructions for deploying locally.
 
+First, set your configurations for your environment variables in the `.env` file (see `.env-sample`) and then proceed with the following depending on your OS:
+
 ### Windows
 Please run the following:
 

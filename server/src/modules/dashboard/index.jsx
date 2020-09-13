@@ -15,32 +15,28 @@ import React from "react";
 import { collect } from "react-recollect";
 
 // RSuite UI Library
-import {
-  Container,
-  Content,
-  Row,
-  Col,
-} from "rsuite";
+import { Container, Content, Row, Col } from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
-// BLUEPRINT STYLES
-import { Button, Tabs, Tab, NonIdealState } from "@blueprintjs/core";
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
-
-import NavBar from "../../components/nav";
-import SideMenu from "../../components/menu";
+// Components
+import NavBar from "../components/nav";
+import SideMenu from "../components/menu";
 
 // ASSETS & APP STYLES
 import "../../styles/App.css";
+import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
+import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
     this.store = props.store;
 
-    this.state = {    };
+    this.state = {};
   }
+
+  renderDashboardTabs() {}
 
   async componentDidMount() {}
 
@@ -62,12 +58,7 @@ class Dashboard extends React.Component {
                 renderBar={() => null}
                 renderRight={() => null}
               />
-              <Content>
-                {this.renderDashboardTabs({
-                  active: "profile",
-                  onSelect: () => console.log("click"),
-                })}
-              </Content>
+              <Content>{this.renderDashboardTabs()}</Content>
             </Container>
           </div>
           {/* MEETING sidebar */}

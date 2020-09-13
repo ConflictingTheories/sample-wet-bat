@@ -11,16 +11,20 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const Sequelize = require("sequelize");
-
-// Connection to Database (SQL ORM)
-const DB = new Sequelize({
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  port: 3306,
-  password: process.env.DB_PASS,
-  dialect: process.env.DB_TYPE,
-});
-
-module.exports = DB;
+const cryptoUtils = require('../lib/Crypto');
+const DB = require('../lib/Database');
+// Seed DB
+module.exports = () => {
+  // Users
+  (async () => {
+    await DB.sync();
+    const saltedPass = cryptoUtils.saltHashPassword('password')
+    const jane = await User.create({
+      username: "janedoe",
+      password: saltedPass.passwordHash,
+      salt: saltedPass.salt
+    });
+    console.log(jane.toJSON());
+  })();
+  
+};

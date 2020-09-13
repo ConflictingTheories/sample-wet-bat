@@ -10,9 +10,11 @@
     "@testing-library/user-event": "^7.1.2",
     "@types/node": "^14.10.1",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "mysql2": "^2.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-recollect": "^5.2.3",
@@ -23,8 +25,9 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "start-linux": "bash ./scripts/start.sh",
-    "start-win": ". ./scripts/start.ps1",
+    "seed":"node config/seeds.js",
+    "start-linux": "node app/WetBat.js",
+    "start-win": "node app/WetBat.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

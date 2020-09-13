@@ -11,16 +11,18 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const Sequelize = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 
-// Connection to Database (SQL ORM)
-const DB = new Sequelize({
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  port: 3306,
-  password: process.env.DB_PASS,
-  dialect: process.env.DB_TYPE,
-});
-
-module.exports = DB;
+// Pass in DB Handler Instance
+module.exports = (DB) => {
+  class User extends Model {}
+  User.init(
+    {
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+      salt: DataTypes.STRING,
+    },
+    { DB, modelName: "user" }
+  );
+  return User;
+};

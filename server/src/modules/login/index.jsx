@@ -13,6 +13,7 @@
 
 import React from "react";
 import { collect } from "react-recollect";
+
 // BLUEPRINT STYLES
 import {
   InputGroup,
@@ -22,9 +23,6 @@ import {
   Button,
   Callout,
 } from "@blueprintjs/core";
-
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // RSuite UI Library
 import {
@@ -39,10 +37,15 @@ import {
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
-// ASSETS & APP STYLES
+// ASSETS
 import Logo from "../../assets/logo.svg";
-import "../../styles/App.css";
 
+// Styles
+import "../../styles/App.css";
+import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
+import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+// Services
 import { login, check } from "../../services/auth";
 
 class Login extends React.Component {
@@ -61,7 +64,6 @@ class Login extends React.Component {
       loading: false,
       error: "",
     };
-  
   }
 
   async componentDidMount() {
