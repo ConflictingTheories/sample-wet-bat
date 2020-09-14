@@ -20,7 +20,7 @@ const DB = new Sequelize({
   host: process.env.DB_HOST,
   port: 3306,
   password: process.env.DB_PASS,
-  dialect: JSON.parse(process.env.DB_TYPE),
+  dialect: process.env.DB_TYPE,
 });
 
 module.exports = DB;

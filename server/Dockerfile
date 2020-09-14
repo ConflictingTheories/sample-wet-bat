@@ -12,6 +12,14 @@
 # \*                                            */
 
 FROM ubuntu
+LABEL Author "Kyle Derby MacInnis"
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Edmonton
+# Yarn & NodeJS
+RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -y && apt-get install -y yarn
 # Env Variables
 ENV API_HOST=${API_HOST}
 ENV API_VERSION=${API_VERSION}
@@ -24,20 +32,14 @@ ENV DB_HOST=${DB_HOST}
 ENV DB_NAME=${DB_NAME}
 ENV PUBLIC_URL=${PUBLIC_URL}
 ENV ENABLE_AUTH=${ENABLE_AUTH}
-ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/Edmonton
 # Copy Content
 WORKDIR /opt
 RUN mkdir wetbat
 WORKDIR /opt/wetbat
 COPY . .
-# Yarn & NodeJS
-RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update -y && apt-get install -y yarn
 # Build Source
-RUN yarn && yarn build
+RUN yarn
+RUN yarn build
 # Expose Ports
 EXPOSE 8081
 # Start when Container Opens

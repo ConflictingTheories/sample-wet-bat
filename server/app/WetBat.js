@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**          	Sample - Wet Bat PoC     	      **
+**           Sample - NERD Starter    	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -66,14 +66,14 @@ app.use("/api/:ver", (req, res) => {
 });
 
 // === STATIC Files
-app.use("/static", express.static(__dirname + "/../build/static"));
+app.use("/static", express.static(__dirname + "/../build"));
 
 // === WEB ROUTE
-app.use("/", index);
+app.use("*", index);
 
 // LISTEN ON PORT
 server.listen(process.env.APP_PORT, () => {
-  console.log("WetBat is Now Live on Port: ", process.env.APP_PORT);
+  console.log("WetBat is now live on Port: ", process.env.APP_PORT);
 });
 
 // FALLBACK FOR PORT
@@ -86,6 +86,7 @@ process.on("uncaughtException", function (e) {
       input: process.stdin,
       output: process.stdout,
     });
+
     rl.question(
       "PORT IN USE: Please select a different port (3000+)? ",
       (answer) => {
