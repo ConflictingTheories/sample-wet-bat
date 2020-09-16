@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           Sample - Weather SPA    	      **
+**           Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -12,28 +12,25 @@
 \*                                            */
 
 module.exports = (DB) => {
-  const Crypto = require("../../../lib/Crypto");
+  const { randomFrom } = require("../../../lib/Crypto");
   const Lead = require("../../../models/Lead")(DB);
   const seeds = require("../json/seeds.json");
-  // Random Data
-
-  const count = 20;
-
-  // Seed Users Table
+  // Seed Leads Table
   return {
     seed: async () => {
       await DB.sync();
+      let count = 20;
       while (--count) {
         // Details (Random)
         const name = [
-          Crypto.randomFrom(seeds.firstNames),
-          Crypto.randomFrom(seeds.lastNames),
+          randomFrom(seeds.firstNames),
+          randomFrom(seeds.lastNames),
         ].join(" ");
         const email = name.split(" ").join(".").toLowerCase() + "@example.com";
-        const city = Crypto.randomFrom(seeds.cities);
-        const contactMethod = Crypto.randomFrom(seeds.contactMethods);
+        const city = randomFrom(seeds.cities);
+        const contactMethod = randomFrom(seeds.contactMethods);
         const phone = "(555)-x0x-xx0x".replace(/x/, (x) =>
-          Crypto.randomFrom("123456789".split(""))
+          randomFrom("123456789".split(""))
         );
         // Make Lead
         await Lead.create({

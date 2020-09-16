@@ -1,6 +1,6 @@
 # /*                                            *\
 # ** ------------------------------------------ **
-# **           Sample - Weather SPA    	      **
+# **           Sample - Wet Bat PoC     	      **
 # ** ------------------------------------------ **
 # **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 # **                                            **
@@ -10,7 +10,6 @@
 # **           All Rights Reserved.             **
 # ** ------------------------------------------ **
 # \*                                            */
-
 # Read .ENV Variables
 $env:BUILD_PATH="$(Get-Location)"
 Set-Location $env:BUILD_PATH;
@@ -22,8 +21,6 @@ foreach( $line in $(Get-Content "$env:BUILD_PATH\.env")){
 
 Set-Location $env:BUILD_PATH\server
 
-yarn
-
-yarn seed
+yarn seed $args
 
 Set-Location $env:BUILD_PATH;

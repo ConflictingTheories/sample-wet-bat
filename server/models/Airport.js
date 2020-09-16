@@ -15,20 +15,21 @@ const { Model, DataTypes } = require("sequelize");
 
 // Pass in DB Handler Instance
 module.exports = (DB) => {
-  const Tour = require('./Tour')(DB);
-  const Quote = require('./Tour')(DB);
   class Airport extends Model {}
   Airport.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       tag: DataTypes.STRING,
       name: DataTypes.STRING,
+      createtAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
-    { DB, modelName: "airport" }
+    { sequelize: DB, modelName: "airport" }
   );
-  Airport.hasMany(Quote,{foreignKey: 'deptId', sourceKey:'id' });
-  Airport.hasMany(Quote,{foreignKey: 'destId', sourceKey:'id' });
-  Airport.hasMany(Tour,{foreignKey: 'airportId', sourceKey:'id' });
-  
   return Airport;
 };

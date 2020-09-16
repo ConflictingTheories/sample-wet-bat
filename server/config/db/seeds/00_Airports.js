@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           Sample - Weather SPA    	      **
+**           Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -12,20 +12,13 @@
 \*                                            */
 
 module.exports = (DB) => {
-  const { saltHashPassword } = require("../../../lib/Crypto");
   const Airport = require("../../../models/Airport")(DB);
+  const seeds = require('../json/seeds.json');
   // Seed Airport Table
   return {
     seed: async () => {
       await DB.sync();
-      await Airport.create({
-        tag: "YYC",
-        name: "Calgary International Airport",
-      });
-      await Airport.create({
-        tag: "YYG",
-        name: "Edmonton International Airport",
-      });
+      seeds.airports && seeds.airports.map(async (x) => await Airport.create(x));
     },
   };
 };

@@ -1,7 +1,7 @@
 #!/bin/bash
 # /*                                            *\
 # ** ------------------------------------------ **
-# **           Sample - Weather SPA    	      **
+# **           Sample - Wet Bat PoC     	      **
 # ** ------------------------------------------ **
 # **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 # **                                            **

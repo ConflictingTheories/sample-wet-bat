@@ -15,23 +15,24 @@ const { Model, DataTypes } = require("sequelize");
 
 // Pass in DB Handler Instance
 module.exports = (DB) => {
-    const Quote = require('./Quote')(DB);
-
   class Lead extends Model {}
   Lead.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       phone: DataTypes.STRING,
       email: DataTypes.STRING,
       city: DataTypes.STRING,
       preferredContact: DataTypes.ENUM("phone", "email", "sms"),
+      createtAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
-    { DB, modelName: "lead" }
+    { sequelize: DB, modelName: "lead" }
   );
-
-  // Relationships
-  Lead.hasMany(Quote)
-
   return Lead;
 };

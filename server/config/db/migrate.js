@@ -56,27 +56,35 @@ module.exports = (async (args) => {
   // Run Migrations in Order of Name (Date)
   fs.readdir(path.join(__dirname, "migrations"), (err, files) => {
     if (err) console.error(err);
-    else
-      files
-        .sort((a, b) => {
-          if (direction === "up") return a-b;
-          else return b-a;
-        })
-        .map(async (file) => {
-          // Run up()
-          await require(path.join(__dirname, "migrations", file))(DB)[
-            direction
-          ]();
+    else {
+      // Sort
+      const orderedFiles =
+        direction === "up" ? files.sort() : files.sort().reverse();
+      console.log("MIGRATIONS::",orderedFiles);
+      // Run
+      orderedFiles.reduce(async (_, file) => {
+        try {
+          console.log("--> Migrating::", file, " :: ", direction);
           // Store Migration in DB
           const done = await Migration.findOne({ where: { migration: file } });
-          if (direction === "up" && !done)
+          if (direction === "up" && !done) {
+            await require(path.join(__dirname, "migrations", file))(DB).up();
             await Migration.create({
               migration: file,
               updatedAt: new Date(),
               createdAt: new Date(),
             });
+          }
           // Delete Migration if Rolldown
-          if (direction === "down" && done) await Migration.destroy({ where: { migration: file } });
-        });
+          if (direction === "down" && done) {
+            await require(path.join(__dirname, "migrations", file))(DB).down();
+            await Migration.destroy({ where: { migration: file } });
+          }
+        } catch (e) {
+          console.error(e);
+        }
+        console.log("--> Done::", file);
+      }, "");
+    }
   });
 })();

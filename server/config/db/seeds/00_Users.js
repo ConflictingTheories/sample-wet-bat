@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           Sample - Weather SPA    	      **
+**           Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -10,21 +10,23 @@
 **           All Rights Reserved.             **
 ** ------------------------------------------ **
 \*                                            */
-
 module.exports = (DB) => {
-  const { saltHashPassword } = require("../../../lib/Crypto");
+  const { saltHashPassword, randomFrom } = require("../../../lib/Crypto");
   const User = require("../../../models/User")(DB);
-  const count = 5;
+  const seeds = require("../json/seeds.json");
   // Seed Users Table
   return {
     seed: async () => {
       await DB.sync();
+      let count = 5;
       while (--count) {
         const name = [
-          Crypto.randomFrom(seeds.firstNames),
-          Crypto.randomFrom(seeds.lastNames),
+          randomFrom(seeds.firstNames),
+          randomFrom(seeds.lastNames),
         ].join(" ");
+        console.log(name);
         const username = name.split(" ").join(".").toLowerCase();
+        console.log(username);
         const saltedPass = saltHashPassword("password");
         const doe = await User.create({
           username: username,

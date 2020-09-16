@@ -17,21 +17,28 @@ const { Model, DataTypes } = require("sequelize");
 module.exports = (DB) => {
   // Models
   const Tour = require("./Tour")(DB);
-  const User = require("./Tour")(DB);
-  const Lead = require("./Tour")(DB);
-  const Airport = require("./Tour")(DB);
+  const User = require("./User")(DB);
+  const Lead = require("./Lead")(DB);
+  const Airport = require("./Airport")(DB);
 
   class Quote extends Model {}
   Quote.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       departureDate: DataTypes.DATE,
       returnDate: DataTypes.DATE,
       travellers: DataTypes.INTEGER,
       transport: DataTypes.ENUM("none", "rental", "own"),
-      cost: DataTypes.FLOAT
+      cost: DataTypes.FLOAT,
+      createtAt:DataTypes.DATE,
+      updatedAt:DataTypes.DATE
     },
-    { DB, modelName: "quote" }
+    { sequelize: DB, modelName: "quote" }
   );
   // Relationships
   Quote.hasOne(Tour, { as: "tourId", foreignKey: "id" });

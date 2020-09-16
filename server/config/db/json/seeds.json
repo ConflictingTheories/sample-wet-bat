@@ -26,5 +26,15 @@
     "Green",
     "Amlin",
     "Barrager"
+  ],
+  "airports": [
+    {
+      "tag": "YYC",
+      "name": "Calgary International Airport"
+    },
+    {
+      "tag": "YYG",
+      "name": "Edmonton International Airport"
+    }
   ]
 }
