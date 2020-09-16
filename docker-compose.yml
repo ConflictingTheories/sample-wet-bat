@@ -44,6 +44,9 @@ services:
       - "wetbat_db"
     links:
       - "wetbat_db:wetbat_db"
+    volumes:
+      - "./server/build:/opt/wetbat/build"
+      - "./server/node_modules:/opt/wetbat/node_modules"
     ports:
       - "${APP_PORT}:${APP_PORT}"
     environment:

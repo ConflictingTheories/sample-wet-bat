@@ -85,6 +85,7 @@ class Dashboard extends React.Component {
           <Container>
             <TopNav
               isLogin={false}
+              
             />
             <Content>{this.renderDashboardTabs()}</Content>
           </Container>
