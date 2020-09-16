@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           Sample - Wet Bat PoC     	      **
+**         	Sample - Wet Bat PoC     	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -11,25 +11,23 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const { Model, DataTypes } = require("sequelize");
+import lessToJs from 'less-vars-to-js';
+import fs from 'fs';
 
-// Pass in DB Handler Instance
-module.exports = (DB) => {
-  const Quote = require('./Quote')(DB);
-  class User extends Model {}
-  User.init(
-    {
-      id: DataTypes.INTEGER,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
-      salt: DataTypes.STRING,
-      name: DataTypes.STRING,
-    },
-    { DB, modelName: "user" }
-  );
-  
-  //Relationships
-  User.hasMany(Quote);
+// Auth Helper Class
+class StyleHelper {
 
-  return User;
-};
+    // Return General File
+   static getStyle: any = (path:string)=>{
+    const paletteLess = fs.readFileSync(path, 'utf8');
+    return lessToJs(paletteLess);
+   }
+
+   // return Colors
+   static getColors: any = ()=>{
+    const paletteLess = fs.readFileSync('../styles/colors.less', 'utf8');
+    return lessToJs(paletteLess);
+   }
+}
+
+export default StyleHelper

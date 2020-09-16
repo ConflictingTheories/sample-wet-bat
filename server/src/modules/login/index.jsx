@@ -34,7 +34,11 @@ import "rsuite/dist/styles/rsuite-dark.css";
 import Logo from "../../assets/logo.svg";
 import "../../styles/App.less";
 
+
 import { login, logout, getAll, check } from "../../services/auth";
+
+import StyleHelper from '../../helpers/styleHelper';
+const colors = StyleHelper.getColors();
 
 class Login extends React.Component {
   constructor(props) {
@@ -97,7 +101,7 @@ class Login extends React.Component {
     return (
       <Container
         style={{
-          background: "@primaryGrad",
+          background: colors["@primaryGrad"],
         }}
       >
         <Header></Header>
@@ -109,13 +113,13 @@ class Login extends React.Component {
                 style={{ backgroundColor: "transparent" }}
               >
                 <Panel bodyFill>
-                  <Container style={{ backgroundColor: "@slateGray" }}>
+                  <Container style={{ backgroundColor: colors["@slateGray"] }}>
                     <Sidebar style={{ width: "320px" }}>
                       <img
                         src={Logo}
                         height="320"
                         style={{
-                          background: "@secondaryGray",
+                          background: colors["@secondaryGray"],
                         }}
                       />
                     </Sidebar>

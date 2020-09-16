@@ -60,7 +60,7 @@ class Dashboard extends React.Component {
     setTimeout(
       () =>
         Notification.open({
-          title: ~~(Math.random() * 20) + " new tours available",
+          title: ~~(Math.random() * 20) + " new leads available",
           description: <Paragraph width={320} rows={3} />,
         }),
       ~~(Math.random() * 10000)
@@ -85,9 +85,6 @@ class Dashboard extends React.Component {
           <Container>
             <TopNav
               isLogin={false}
-              renderBrand={this.renderClientSelect}
-              renderBar={() => null}
-              renderRight={() => null}
             />
             <Content>{this.renderDashboardTabs()}</Content>
           </Container>

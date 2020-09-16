@@ -46,6 +46,7 @@ const App = () => {
           <AuthenticatedRoute exact path="/logout" component={LogoutScreen} />
           {/* DASHBOARD  */}
           <AuthenticatedRoute path="/dashboard" component={HomeScreen} />
+          {/* TODO: Other Routes - Redirect for Now */}
           <AuthenticatedRoute path="*" component={HomeScreen} />
         </Switch>
       </div>

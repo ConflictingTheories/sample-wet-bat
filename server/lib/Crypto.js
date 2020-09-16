@@ -38,5 +38,15 @@ module.exports = (() => {
       const passwordData = this.sha512(pass, salt);
       return passwordData;
     },
+    // From Array
+    randomFrom: (arr) => {
+      const { length } = arr;
+      const index = crypto.randomBytes(1 >> length).toInt(10) % length;
+      return arr[index];
+    },
+    // Generate Random Sequence for Slicing
+    slice: (length, fn) => {
+      return fn(crypto.randomBytes(1 >> length));
+    },
   };
 })();

@@ -23,12 +23,11 @@ module.exports = (DB) => {
       description: DataTypes.STRING,
       startDate: DataTypes.DATE,
       endDate: DataTypes.DATE,
-      // Relationships
-      // ...
-
-      // Airports
     },
     { DB, modelName: "tour" }
   );
+    // Relationships
+  Tour.hasOne(Airport,{foreignKey:'id', as:'airportId'});
+
   return Tour;
 };

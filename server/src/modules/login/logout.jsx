@@ -36,6 +36,9 @@ import Logo from "../../assets/logo.svg";
 // Services
 import { logout } from "../../services/auth";
 
+// Helpers
+import StyleHelper from '../../helpers/styleHelper';
+const colors = StyleHelper.getColors();
 
 class Logout extends React.Component {
   async componentDidMount() {
@@ -52,7 +55,7 @@ class Logout extends React.Component {
     return (
       <Container
         style={{
-          background: "linear-gradient(45deg, rgba(37, 1, 63, 0.52), black)",
+          background: colors["@primaryGrad"],
         }}
       >
         <Header></Header>
@@ -60,7 +63,7 @@ class Logout extends React.Component {
           <FlexboxGrid justify="center">
             <FlexboxGrid.Item colspan={24}>
               <div
-                className="App-splash"
+                className="app-splash"
                 style={{ backgroundColor: "transparent" }}
               >
                 <Panel bodyFill>
@@ -70,7 +73,7 @@ class Logout extends React.Component {
                         src={Logo}
                         height="320"
                         style={{
-                          background: "linear-gradient(45deg,indigo,black)",
+                          background: colors["@secondaryGrad"],
                         }}
                       />
                     </Sidebar>

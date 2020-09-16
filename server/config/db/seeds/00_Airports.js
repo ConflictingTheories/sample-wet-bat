@@ -1,6 +1,6 @@
 /*                                            *\
 ** ------------------------------------------ **
-**           Sample - Wet Bat PoC     	      **
+**           Sample - Weather SPA    	      **
 ** ------------------------------------------ **
 **  Copyright (c) 2020 - Kyle Derby MacInnis  **
 **                                            **
@@ -11,25 +11,21 @@
 ** ------------------------------------------ **
 \*                                            */
 
-const { Model, DataTypes } = require("sequelize");
-
-// Pass in DB Handler Instance
 module.exports = (DB) => {
-  const Quote = require('./Quote')(DB);
-  class User extends Model {}
-  User.init(
-    {
-      id: DataTypes.INTEGER,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING,
-      salt: DataTypes.STRING,
-      name: DataTypes.STRING,
+  const { saltHashPassword } = require("../../../lib/Crypto");
+  const Airport = require("../../../models/Airport")(DB);
+  // Seed Airport Table
+  return {
+    seed: async () => {
+      await DB.sync();
+      await Airport.create({
+        tag: "YYC",
+        name: "Calgary International Airport",
+      });
+      await Airport.create({
+        tag: "YYG",
+        name: "Edmonton International Airport",
+      });
     },
-    { DB, modelName: "user" }
-  );
-  
-  //Relationships
-  User.hasMany(Quote);
-
-  return User;
+  };
 };

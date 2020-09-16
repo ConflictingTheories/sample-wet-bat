@@ -120,39 +120,77 @@ class SideMenu extends React.Component {
                 eventKey="1"
                 icon={<Icon icon="dashboard" />}
               >
-                Dashboard
+                Home
               </Nav.Item>
             </Link>
-            <Link to="/meetings">
+            <Link to="/quotes">
               <Nav.Item
                 active={"2" == activeKey}
                 eventKey="2"
                 icon={<Icon icon="calendar" />}
               >
-                Meetings
+                Quote
               </Nav.Item>
             </Link>
-            <Link to="/clients">
+            <Link to="/leads">
               <Nav.Item
                 active={"3" == activeKey}
                 eventKey="3"
                 icon={<Icon icon="building" />}
               >
-                Clients
+                Leads
               </Nav.Item>
             </Link>
-            <Link to="/stakeholders">
+            <Link to="/tours">
               <Nav.Item
                 active={"4" == activeKey}
                 eventKey="4"
                 icon={<Icon icon="group" />}
               >
-                Stakeholders
+                Tours
               </Nav.Item>
             </Link>
           </Nav>
           <Nav appearance="subtle">
-            <Link to="/settings">
+            <Link to="/invoices">
+              <Nav.Item
+                active={"5" == activeKey}
+                eventKey="5"
+                icon={<Icon icon="dashboard" />}
+              >
+                Home
+              </Nav.Item>
+            </Link>
+            <Link to="/analytics">
+              <Nav.Item
+                active={"6" == activeKey}
+                eventKey="6"
+                icon={<Icon icon="calendar" />}
+              >
+                Quote
+              </Nav.Item>
+            </Link>
+            <Link to="/teams">
+              <Nav.Item
+                active={"7" == activeKey}
+                eventKey="7"
+                icon={<Icon icon="building" />}
+              >
+                Leads
+              </Nav.Item>
+            </Link>
+            <Link to="/admin">
+              <Nav.Item
+                active={"4" == activeKey}
+                eventKey="4"
+                icon={<Icon icon="group" />}
+              >
+                Tours
+              </Nav.Item>
+            </Link>
+          </Nav>
+          <Nav appearance="subtle">
+            <Link to="/support">
               <Nav.Item
                 active={"5" == activeKey}
                 eventKey="5"

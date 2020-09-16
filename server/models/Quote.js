@@ -15,6 +15,12 @@ const { Model, DataTypes } = require("sequelize");
 
 // Pass in DB Handler Instance
 module.exports = (DB) => {
+  // Models
+  const Tour = require("./Tour")(DB);
+  const User = require("./Tour")(DB);
+  const Lead = require("./Tour")(DB);
+  const Airport = require("./Tour")(DB);
+
   class Quote extends Model {}
   Quote.init(
     {
@@ -22,20 +28,16 @@ module.exports = (DB) => {
       departureDate: DataTypes.DATE,
       returnDate: DataTypes.DATE,
       travellers: DataTypes.INTEGER,
-      transport: DataTypes.ENUM('none','rental','own'),
-      // Relationships
-      //..
-
-      // Tour
-      //
-
-      // Created By (Sales Person)
-      //
-
-      // Lead
-      // 
+      transport: DataTypes.ENUM("none", "rental", "own"),
+      cost: DataTypes.FLOAT
     },
     { DB, modelName: "quote" }
   );
+  // Relationships
+  Quote.hasOne(Tour, { as: "tourId", foreignKey: "id" });
+  Quote.hasOne(Lead, { as: "leadId", foreignKey: "id" });
+  Quote.hasOne(Airport, { as: "deptId", foreignKey: "id" });
+  Quote.hasOne(Airport, { as: "destId", foreignKey: "id" });
+  Quote.hasOne(User, { as: "salesId", foreignKey: "id" });
   return Quote;
 };
