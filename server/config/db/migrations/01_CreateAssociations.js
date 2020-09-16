@@ -20,50 +20,50 @@ module.exports = (DB) => {
       // Add Foreign Keys & Relationships
 
       // quote -> hasOne Tour
-      await _DB.addColumn("quote", "tourId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("quotes", "tourId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "tour",
+          model: "tours",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       // quote -> hasOne Destination
-      await _DB.addColumn("quote", "destId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("quotes", "destId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "airport",
+          model: "airports",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       // quote -> hasOne Departure
-      await _DB.addColumn("quote", "deptId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("quotes", "deptId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "airport",
+          model: "airports",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       // quote -> hasOne lead
-      await _DB.addColumn("quote", "leadId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("quotes", "leadId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "lead",
+          model: "leads",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       });
       // quote -> hasOne sales person
-      await _DB.addColumn("quote", "salesId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("quotes", "salesId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "user",
+          model: "users",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -71,10 +71,10 @@ module.exports = (DB) => {
       });
 
       // tour -> hasOne Airport
-      await _DB.addColumn("tour", "airportId", {
-        type: DataTypes.INTERGER,
+      await _DB.addColumn("tours", "airportId", {
+        type: DataTypes.INTEGER,
         references: {
-          model: "airport",
+          model: "airports",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -84,12 +84,12 @@ module.exports = (DB) => {
     },
     down: async () => {
       // Remove Foreign Key Constraints
-      await _DB.removeColumn("quote", "tourId");
-      await _DB.removeColumn("quote", "destId");
-      await _DB.removeColumn("quote", "deptId");
-      await _DB.removeColumn("quote", "leadId");
-      await _DB.removeColumn("quote", "salesId");
-      await _DB.removeColumn("tour", "airportId");
+      await _DB.removeColumn("quotes", "tourId");
+      await _DB.removeColumn("quotes", "destId");
+      await _DB.removeColumn("quotes", "deptId");
+      await _DB.removeColumn("quotes", "leadId");
+      await _DB.removeColumn("quotes", "salesId");
+      await _DB.removeColumn("tours", "airportId");
     },
   };
 };

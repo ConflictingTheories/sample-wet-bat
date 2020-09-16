@@ -35,8 +35,11 @@ Migration.init(
 );
 
 // Run
-module.exports = (async () => {
+module.exports = (async (args) => {
   const _DB = DB.getQueryInterface();
+
+  // Default UP
+  const direction = process.argv.slice(2)[0] == "down" ? "down" : "up";
 
   // create Migrations Table
   await _DB.createTable("migrations", {
@@ -55,16 +58,25 @@ module.exports = (async () => {
     if (err) console.error(err);
     else
       files
-        .sort((a, b) => b - a)
+        .sort((a, b) => {
+          if (direction === "up") return a-b;
+          else return b-a;
+        })
         .map(async (file) => {
           // Run up()
-          await require(path.join(__dirname, "migrations", file))(DB).up();
+          await require(path.join(__dirname, "migrations", file))(DB)[
+            direction
+          ]();
           // Store Migration in DB
-          await Migration.create({
-            migration: file,
-            updatedAt: new Date(),
-            createdAt: new Date(),
-          });
+          const done = await Migration.findOne({ where: { migration: file } });
+          if (direction === "up" && !done)
+            await Migration.create({
+              migration: file,
+              updatedAt: new Date(),
+              createdAt: new Date(),
+            });
+          // Delete Migration if Rolldown
+          if (direction === "down" && done) await Migration.destroy({ where: { migration: file } });
         });
   });
 })();

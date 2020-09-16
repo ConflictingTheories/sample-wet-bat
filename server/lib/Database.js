@@ -21,6 +21,9 @@ const DB = new Sequelize({
   port: 3306,
   password: process.env.DB_PASS,
   dialect: process.env.DB_TYPE,
+  pool:{
+    max: 5,
+  }
 });
 
 module.exports = DB;

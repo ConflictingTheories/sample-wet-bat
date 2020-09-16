@@ -22,8 +22,6 @@ foreach( $line in $(Get-Content "$env:BUILD_PATH\.env")){
 
 Set-Location $env:BUILD_PATH\server
 
-yarn
-
-yarn migrate
+yarn migrate $args
 
 Set-Location $env:BUILD_PATH;

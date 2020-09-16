@@ -100,11 +100,11 @@ module.exports = (DB) => {
       });
     },
     down: async () => {
-      await _DB.deleteTable("users");
-      await _DB.deleteTable("leads");
-      await _DB.deleteTable("airports");
-      await _DB.deleteTable("quotes");
-      await _DB.deleteTable("tours");
+      await _DB.dropTable("leads");
+      await _DB.dropTable("airports");
+      await _DB.dropTable("quotes");
+      await _DB.dropTable("tours");
+      await _DB.dropTable("users");
     },
   };
 };

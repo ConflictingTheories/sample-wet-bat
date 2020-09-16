@@ -14,58 +14,29 @@
 module.exports = (DB) => {
   const Crypto = require("../../../lib/Crypto");
   const Lead = require("../../../models/Lead")(DB);
+  const seeds = require("../json/seeds.json");
+  // Random Data
 
-  const firstNames = [
-    "Harry",
-    "Jim",
-    "Moe",
-    "Molly",
-    "Ferris",
-    "John",
-    "Jane",
-    "Philippe",
-    "Marco",
-    "Jared",
-    "Shannon",
-  ];
-  const lastNames = [
-    "Potsworth",
-    "Johnson",
-    "Flanders",
-    "Brown",
-    "Dawson",
-    "Thompson",
-    "Lee",
-    "Ruiz",
-    "Green",
-    "Amlin",
-    "Barrager",
-  ];
-  const cities = ["Calgary", "Edmonton", "Vancouver"];
-  const contacts = ["phone", "email", "sms"];
+  const count = 20;
+
   // Seed Users Table
   return {
     seed: async () => {
       await DB.sync();
-      let count = 100;
       while (--count) {
+        // Details (Random)
         const name = [
-          Crypto.randomFrom(firstNames),
-          Crypto.randomFrom(lastNames),
+          Crypto.randomFrom(seeds.firstNames),
+          Crypto.randomFrom(seeds.lastNames),
         ].join(" ");
-        
-        const email = [
-          name.split(" ").join(".").toLowerCase(),
-          "@example.com",
-        ].join("");
- 
-        const city = Crypto.randomFrom(cities);
-        const contactMethod = Crypto.randomFrom(contacts);
-        const phone = Crypto.slice(10, (buffer) => {
-          return buffer.map((x) => parseInt(x) % 9).join("");
-        });    
-
-        const doe = await Lead.create({
+        const email = name.split(" ").join(".").toLowerCase() + "@example.com";
+        const city = Crypto.randomFrom(seeds.cities);
+        const contactMethod = Crypto.randomFrom(seeds.contactMethods);
+        const phone = "(555)-x0x-xx0x".replace(/x/, (x) =>
+          Crypto.randomFrom("123456789".split(""))
+        );
+        // Make Lead
+        await Lead.create({
           name: name,
           phone: phone,
           email: email,

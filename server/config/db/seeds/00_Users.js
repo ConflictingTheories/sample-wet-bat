@@ -14,17 +14,26 @@
 module.exports = (DB) => {
   const { saltHashPassword } = require("../../../lib/Crypto");
   const User = require("../../../models/User")(DB);
+  const count = 5;
   // Seed Users Table
   return {
     seed: async () => {
       await DB.sync();
-      const saltedPass = saltHashPassword("password");
-      const jane = await User.create({
-        username: "janedoe",
-        password: saltedPass.passwordHash,
-        salt: saltedPass.salt,
-      });
-      console.log(jane.toJSON());
+      while (--count) {
+        const name = [
+          Crypto.randomFrom(seeds.firstNames),
+          Crypto.randomFrom(seeds.lastNames),
+        ].join(" ");
+        const username = name.split(" ").join(".").toLowerCase();
+        const saltedPass = saltHashPassword("password");
+        const doe = await User.create({
+          username: username,
+          password: saltedPass.passwordHash,
+          salt: saltedPass.salt,
+          name: name,
+        });
+        console.log(doe.toJSON());
+      }
     },
   };
 };

@@ -21,6 +21,4 @@ source $BUILD_PATH/.env
 
 cd $BUILD_PATH/server
 
-yarn
-
-yarn migrate
+yarn migrate $1

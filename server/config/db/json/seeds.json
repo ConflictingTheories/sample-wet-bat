@@ -1,0 +1,30 @@
+{
+  "cities": ["Calgary", "Edmonton", "Vancouver"],
+  "contactMethods": ["phone", "email", "sms"],
+  "firstNames": [
+    "Harry",
+    "Jim",
+    "Moe",
+    "Molly",
+    "Ferris",
+    "John",
+    "Jane",
+    "Philippe",
+    "Marco",
+    "Jared",
+    "Shannon"
+  ],
+  "lastNames": [
+    "Potsworth",
+    "Johnson",
+    "Flanders",
+    "Brown",
+    "Dawson",
+    "Thompson",
+    "Lee",
+    "Ruiz",
+    "Green",
+    "Amlin",
+    "Barrager"
+  ]
+}
