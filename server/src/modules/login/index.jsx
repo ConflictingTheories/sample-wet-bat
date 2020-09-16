@@ -1,59 +1,44 @@
-/*                                            *\
-** ------------------------------------------ **
-**           Sample - Wet Bat PoC     	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
-
 import React from "react";
 import { collect } from "react-recollect";
-
 // BLUEPRINT STYLES
 import {
   InputGroup,
   FormGroup,
+  Card,
   Classes,
   Intent,
+  ProgressBar,
   Button,
   Callout,
 } from "@blueprintjs/core";
+
+import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
+import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 // RSuite UI Library
 import {
   Container,
   Header,
+  Navbar,
   Content,
   Sidebar,
   FlexboxGrid,
   Panel,
   Form,
   ButtonToolbar,
+  Footer,
 } from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
-// ASSETS
+// ASSETS & APP STYLES
 import Logo from "../../assets/logo.svg";
-
-// Styles
 import "../../styles/App.less";
-import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
-import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-// Services
-import { login, check } from "../../services/auth";
+import { login, logout, getAll, check } from "../../services/auth";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.store = props.store;
 
@@ -64,6 +49,8 @@ class Login extends React.Component {
       loading: false,
       error: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -110,7 +97,7 @@ class Login extends React.Component {
     return (
       <Container
         style={{
-          background: "linear-gradient(45deg, rgba(37, 1, 63, 0.52), black)",
+          background: "@primaryGrad",
         }}
       >
         <Header></Header>
@@ -118,17 +105,17 @@ class Login extends React.Component {
           <FlexboxGrid justify="center">
             <FlexboxGrid.Item colspan={24}>
               <div
-                className="App-splash"
+                className={"app-splash"}
                 style={{ backgroundColor: "transparent" }}
               >
                 <Panel bodyFill>
-                  <Container style={{ backgroundColor: "#30404d" }}>
+                  <Container style={{ backgroundColor: "@slateGray" }}>
                     <Sidebar style={{ width: "320px" }}>
                       <img
                         src={Logo}
                         height="320"
                         style={{
-                          background: "linear-gradient(45deg,indigo,black)",
+                          background: "@secondaryGray",
                         }}
                       />
                     </Sidebar>

@@ -30,7 +30,7 @@ import {
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-import NavBar from "../../components/nav";
+import TopNav from "../../components/nav";
 import SideMenu from "../../components/menu";
 
 // ASSETS & APP STYLES
@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
         />
         <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
           <Container>
-            <NavBar
+            <TopNav
               isLogin={false}
               renderBrand={this.renderClientSelect}
               renderBar={() => null}

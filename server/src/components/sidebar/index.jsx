@@ -1,16 +1,3 @@
-/*                                            *\
-** ------------------------------------------ **
-**           Sample - Wet Bat PoC     	      **
-** ------------------------------------------ **
-**  Copyright (c) 2020 - Kyle Derby MacInnis  **
-**                                            **
-** Any unauthorized distribution or transfer  **
-**    of this work is strictly prohibited.    **
-**                                            **
-**           All Rights Reserved.             **
-** ------------------------------------------ **
-\*                                            */
-
 import React from "react";
 
 import {
@@ -33,11 +20,12 @@ import {
   Row,
   Col,
 } from "rsuite";
+import "../../assets/rsuite-dark.css";
 
-import AuthHelper from "../../helpers/authHelper";
+import AuthHelper from "../../helper/authHelper";
 import { collect, batch } from "react-recollect";
 
-class SideMenu extends React.Component {
+class SideNav extends React.Component {
   constructor(props) {
     super(props);
     this.store = props.store;
@@ -93,7 +81,7 @@ class SideMenu extends React.Component {
                   fontFamily: "amerika-sans",
                 }}
               >
-                Wet Bat
+                archimedes
               </div>
             )}
           </div>
@@ -176,5 +164,11 @@ class SideMenu extends React.Component {
     ) : null;
   }
 }
+export default collect(SideNav);
 
-export default collect(SideMenu);
+const iconStyles = {
+  width: 56,
+  height: 56,
+  lineHeight: "56px",
+  textAlign: "center",
+};

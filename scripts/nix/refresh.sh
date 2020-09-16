@@ -19,8 +19,6 @@ cd $BUILD_PATH
 
 source $BUILD_PATH/.env
 
-# Compile
-docker-compose build 
+cd ./server
 
-# Deploy
-docker-compose up -d
+yarn && yarn build

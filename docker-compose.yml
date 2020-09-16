@@ -1,4 +1,4 @@
-version: "3.5"
+version: "2.0"
 services:
   # Load Balancer (NginX)
   wetbat_lb:
@@ -9,6 +9,8 @@ services:
       - "./load-balancer/certs:/etc/letsencrypt"
     depends_on:
       - "wetbat_portal"
+    links:
+      - "wetbat_portal:wetbat_portal"
     build:
       context: ./load-balancer/
     ports:
@@ -40,21 +42,19 @@ services:
       context: ./server/
     depends_on:
       - "wetbat_db"
+    links:
+      - "wetbat_db:wetbat_db"
     ports:
       - "${APP_PORT}:${APP_PORT}"
     environment:
       APP_PORT: ${APP_PORT}
-      API_HOST: ${API_HOST}
+      API_HOST: ${API_HOST_DOCKER}
       API_VERSION: ${API_VERSION}
       API_ROUTE_PATH: ${API_ROUTE_PATH}
       DB_TYPE: ${DB_TYPE}
-      DB_HOST: ${DB_HOST}
+      DB_HOST: ${DB_HOST_DOCKER}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
       PUBLIC_URL: ${PUBLIC_URL}
       ENABLE_AUTH: ${ENABLE_AUTH}
-# Network to Communicate
-networks:
-  default:
-    name: wetbat-network

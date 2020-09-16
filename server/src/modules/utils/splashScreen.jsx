@@ -21,7 +21,7 @@ import "../../styles/App.less";
 function SplashScreen() {
   return (
     <div className="App">
-      <header className="App-splash">
+      <header className="app-splash">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Please, wait a moment while we load the application.</p>
       </header>

@@ -21,6 +21,3 @@ source $BUILD_PATH/.env
 
 # Compile
 docker-compose build 
-
-# Deploy
-docker-compose up -d

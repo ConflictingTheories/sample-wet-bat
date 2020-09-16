@@ -1,34 +1,97 @@
-// Colour Definitions
-@background: #282c34;
+// Colours
+@primaryColor: rgba(37, 1, 63, 0.52);
+@secondaryColor: #ab00aa77;
+@dark: #222;
+@textColor: white;
 @linkColor: #61dafb;
-@textColor: #fff;
+
+// Grays
+@darkGray: #444;
+@midGray: #777;
+@lightGray: #aaa;
+@slateGray: #30404d;
+
+// Mid Tones
+@coldGray: #455;
+@rustGray: #544;
+@warmGray: #664;
+
+// Gradients
+@primaryGrad: linear-gradient(45deg, @primaryColor, black);
+@secondaryGrad: linear-gradient(45deg,indigo,black);
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: @dark;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: @secondaryColor;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: @coldGray;
+}
 
 .App {
   text-align: center;
 }
 
-.App-header {
-  background-color: @background;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.bp3-tabs.bp3-vertical > .bp3-tab-panel {
+  width: 100%;
+}
+
+
+.app-splash {
+  background: @primaryGrad;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: @textColor;
+}
+
+.App-header {
+  background: @primaryGrad;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: @textColor;
+}
+
+.App-body {
+  background: @primaryGrad;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: calc(10px + 2vmin);
   color: @textColor;
 }
 
 .App-link {
   color: @linkColor;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 @keyframes App-logo-spin {
