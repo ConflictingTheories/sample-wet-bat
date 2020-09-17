@@ -29,7 +29,7 @@ module.exports = (DB) => {
         const email = name.split(" ").join(".").toLowerCase() + "@example.com";
         const city = randomFrom(seeds.cities);
         const contactMethod = randomFrom(seeds.contactMethods);
-        const phone = "(555)-x0x-xx0x".replace(/x/, (x) =>
+        const phone = "(555)-x0x-xx0x".replace(/x/g, (x) =>
           randomFrom("123456789".split(""))
         );
         // Make Lead

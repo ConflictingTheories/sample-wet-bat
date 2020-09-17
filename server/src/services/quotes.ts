@@ -22,6 +22,15 @@ export async function getAll() {
 }
 
 // GET /quotes/:id
+export async function create(quoteDetails:any) {
+  return ApiHelper.post(`/quotes/create`, quoteDetails).then((quotes: any) => {
+    console.log(quotes);
+    return quotes;
+  });
+}
+
+
+// GET /quotes/:id
 export async function getByUserId(id:number) {
   return ApiHelper.get(`/quotes/${id}`).then((quotes: any) => {
     console.log(quotes);

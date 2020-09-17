@@ -29,7 +29,7 @@ module.exports = (DB) => {
       email: DataTypes.STRING,
       city: DataTypes.STRING,
       preferredContact: DataTypes.ENUM("phone", "email", "sms"),
-      createtAt: DataTypes.DATE,
+      createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },
     { sequelize: DB, modelName: "lead" }

@@ -18,14 +18,13 @@ const router = express.Router({
 const Error = require("../../lib/Error");
 
 module.exports = (DB) => {
-
-  const Tour = require('../../models/Tour')(DB);
-  const Airport = require('../../models/Airport')(DB);
+  const Tour = require("../../models/Tour")(DB);
+  const Airport = require("../../models/Airport")(DB);
 
   // GET /  -- Get Tours
   router.get("/", async (req, res) => {
     try {
-      let tours = await Tour.findAll();
+      const tours = await Tour.findAll();
       res.json(tours.get());
     } catch (e) {
       Error.setError("Error", 500, e);
@@ -36,7 +35,7 @@ module.exports = (DB) => {
   // GET /airports -- Return Airports
   router.get("/airports", async (_, res) => {
     try {
-      let airports = await Airport.findAll();
+      const airports = await Airport.findAll();
       res.json(airports.get());
     } catch (e) {
       Error.setError("Error", 500, e);

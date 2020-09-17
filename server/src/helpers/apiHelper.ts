@@ -77,12 +77,16 @@ async function handleResponse(response: Response) {
         location && location.reload(true);
       }
     } else {
-      const data = text && JSON.parse(text);
-      if (!response.ok) {
-        const error = (data && data.message) || response.statusText;
-        return Promise.reject(error);
+      try {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+          const error = (data && data.message) || response.statusText;
+          return Promise.reject(error);
+        }
+        return data;
+      } catch (e) {
+        return Promise.reject(e);
       }
-      return data;
     }
   });
 }

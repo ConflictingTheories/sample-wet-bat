@@ -28,7 +28,7 @@ module.exports = (DB) => {
       password: DataTypes.STRING,
       salt: DataTypes.STRING,
       name: DataTypes.STRING,
-      createtAt:DataTypes.DATE,
+      createdAt:DataTypes.DATE,
       updatedAt:DataTypes.DATE
     },
     { sequelize: DB, modelName: "user" }

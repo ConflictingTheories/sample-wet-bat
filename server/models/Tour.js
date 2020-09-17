@@ -29,7 +29,7 @@ module.exports = (DB) => {
       description: DataTypes.STRING,
       startDate: DataTypes.DATE,
       endDate: DataTypes.DATE,
-      createtAt:DataTypes.DATE,
+      createdAt:DataTypes.DATE,
       updatedAt:DataTypes.DATE
     },
     { sequelize: DB, modelName: "tour" }

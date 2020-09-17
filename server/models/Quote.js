@@ -35,7 +35,7 @@ module.exports = (DB) => {
       travellers: DataTypes.INTEGER,
       transport: DataTypes.ENUM("none", "rental", "own"),
       cost: DataTypes.FLOAT,
-      createtAt:DataTypes.DATE,
+      createdAt:DataTypes.DATE,
       updatedAt:DataTypes.DATE
     },
     { sequelize: DB, modelName: "quote" }

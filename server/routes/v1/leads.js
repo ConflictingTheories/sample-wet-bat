@@ -18,13 +18,13 @@ const router = express.Router({
 const Error = require("../../lib/Error");
 
 module.exports = (DB) => {
-  const Lead = require('../../models/Lead')(DB);
+  const Lead = require("../../models/Lead")(DB);
 
   // GET /
   router.get("/", async (req, res) => {
     try {
-     let leads = await Lead.findAll();
-      res.json(leads.get());
+      const leads = await Lead.findAll();
+      res.json(leads);
     } catch (e) {
       Error.setError("Error", 500, e);
       Error.sendError(res);

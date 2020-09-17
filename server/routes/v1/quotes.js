@@ -18,25 +18,26 @@ const router = express.Router({
 const Error = require("../../lib/Error");
 
 module.exports = (DB) => {
-  const Quote = require('../../models/Quote')(DB);
+  const Quote = require("../../models/Quote")(DB);
 
   // GET /
   router.get("/", async (req, res) => {
     try {
       const quotes = await Quote.findAll();
-      res.json(quotes.get());
+      res.json(quotes);
     } catch (e) {
       Error.setError("Error", 500, e);
       Error.sendError(res);
     }
   });
 
+  // GET /:id
   router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
       // Fetch by User Id
-      const quotes = await Quote.findAll({where:{salesId:id}});
-      res.json(quotes.get());
+      const quotes = await Quote.findAll({ where: { salesId: id } });
+      res.json(quotes);
     } catch (e) {
       Error.setError("Error", 500, e);
       Error.sendError(res);

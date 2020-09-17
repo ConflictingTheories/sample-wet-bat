@@ -35,6 +35,7 @@ import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 // COMPONENTS
 import TopNav from "../../components/nav";
 import SideMenu from "../../components/menu";
+import QuickQuoteForm from "../../components/form/quote";
 
 // SERVICES
 import * as Leads from "../../services/leads";
@@ -67,22 +68,24 @@ class Dashboard extends React.Component {
 
   async componentDidMount() {
     // Fetch Datasets
-    let leads = await Leads.getAll();
-    let quotes = await Quotes.getAll();
-    let airports = await Tours.getAirports();
-    let tours = await Tours.getAll();
-
-    console.log(leads, quotes, airports, tours);
-
-    // Load into Store (for other page access)
-    this.setState({ leads, quotes, airports, tours }, () =>
-      batch(() => {
-        this.store.leads = leads;
-        this.store.quotes = quotes;
-        this.store.airports = airports;
-        this.store.tours = leads;
-      })
-    );
+    try {
+      let leads = await Leads.getAll();
+      let quotes = await Quotes.getAll();
+      let airports = await Tours.getAirports();
+      let tours = await Tours.getAll();
+      console.log(leads, quotes, airports, tours);
+      // Load into Store (for other page access)
+      this.setState({ leads, quotes, airports, tours }, () =>
+        batch(() => {
+          this.store.leads = leads;
+          this.store.quotes = quotes;
+          this.store.airports = airports;
+          this.store.tours = leads;
+        })
+      );
+    } catch (e) {
+      console.error(e);
+    }
 
     // Provide example "Notification"
     setTimeout(
@@ -105,9 +108,13 @@ class Dashboard extends React.Component {
 
     // TODO: Calculate Etc..
   }
-
+  
   renderQuotePanel() {
-    return <React.Fragment>{/* //Form  */}</React.Fragment>;
+    return (
+      <React.Fragment>
+        <QuickQuoteForm />
+      </React.Fragment>
+    );
   }
 
   renderLeadsList() {

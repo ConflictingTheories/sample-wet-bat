@@ -26,7 +26,7 @@ module.exports = (DB) => {
       },
       tag: DataTypes.STRING,
       name: DataTypes.STRING,
-      createtAt: DataTypes.DATE,
+      createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },
     { sequelize: DB, modelName: "airport" }

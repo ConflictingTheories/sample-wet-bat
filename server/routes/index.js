@@ -18,7 +18,6 @@ const router = express.Router({ mergeParams: true });
 const Error = require("../lib/Error");
 
 module.exports = function (_) {
-
   router.use("*", express.static(__dirname + "/../build"));
 
   router.get("/", function (_, res) {
