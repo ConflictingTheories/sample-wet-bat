@@ -20,14 +20,15 @@ import {
   Content,
   Notification,
   Placeholder,
+  Row,
+  Col,
+  Panel,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+// import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // BLUEPRINT STYLES
-import {
-  Intent,
-  Callout,
-} from "@blueprintjs/core";
+import { Intent, Callout } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -36,16 +37,107 @@ import SideMenu from "../../components/menu";
 
 // ASSETS & APP STYLES
 import "../../styles/less/App.less";
+import Logo from "../../assets/wetbat.png";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  async componentDidMount() {
+    // TODO: Fetch Data from API
+    // DataSets
+    // Fetch Tours
+    // Fetch Airports
+    // Fetch Leads
+    // Fetch Quotes
+    // TODO: Fetch User Info
+    // Calculate Revenue
+    // Calculate Etc..
+  }
+
+  renderQuotePanel() {}
+
+  renderLeadsList() {}
+
+  renderQuotesList() {}
+
   renderDashboardTabs() {
     return (
       <React.Fragment>
         <Callout intent={Intent.SUCCESS} title={"Wet Bat Loaded"}></Callout>
+        <Row>
+          <Col>
+            <Panel bordered>
+              <Row>
+                <Col md={8}>
+                  <Placeholder.Paragraph rowHeight={10} />
+                </Col>
+                <Col>
+                  <img src={Logo} />
+                </Col>
+              </Row>
+            </Panel>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={8}>
+            <Panel bordered header="Quick Quote">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={5} />
+              {this.renderQuotePanel()}
+            </Panel>
+          </Col>
+          <Col md={8}>
+            <Panel bordered header="Pending Quotes">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={5} />
+              {this.renderQuotesList()}
+            </Panel>
+          </Col>
+          <Col md={8}>
+            <Panel bordered header="New Leads">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={5} />
+              {this.renderLeadsList()}
+            </Panel>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={16}>
+            <Panel bordered header="Popular Destinations &amp; Packages">
+              {" "}
+              <Placeholder.Paragraph width={780} rows={5} />
+            </Panel>
+          </Col>
+          <Col md={8}>
+            <Panel bordered header="Team Chat">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={5} />
+            </Panel>
+          </Col>
+        </Row>
+        <Row>
+          {" "}
+          <Col md={8}>
+            <Panel bordered header="Revenue">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={3} />
+            </Panel>
+          </Col>
+          <Col md={8}>
+            <Panel bordered header="Potential Revenue">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={3} />
+            </Panel>
+          </Col>
+          <Col md={8}>
+            <Panel bordered header="Close Ratios">
+              {" "}
+              <Placeholder.Paragraph width={320} rows={3} />
+            </Panel>
+          </Col>
+        </Row>
       </React.Fragment>
     );
   }
@@ -78,13 +170,7 @@ class Dashboard extends React.Component {
         />
         <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
           <Container>
-            <TopNav
-              isLogin={false}
-              // Can be Overridden & customized
-              // renderRight={}
-              // renderBrand={}
-              // renderBar={}
-            />
+            <TopNav isLogin={false} />
             <Content>{this.renderDashboardTabs()}</Content>
           </Container>
         </div>

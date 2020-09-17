@@ -54,11 +54,7 @@ class TopNav extends React.Component {
   }
 
   renderBar() {
-    return (
-      <React.Fragment>
-        {/* // Nothing */}
-      </React.Fragment>
-    );
+    return <React.Fragment>{/* // Nothing */}</React.Fragment>;
   }
 
   renderRight() {
@@ -71,18 +67,18 @@ class TopNav extends React.Component {
           </Button>
         </ControlGroup>
         <Link to="/notifications">
-        &nbsp;&nbsp;
-          <Icon icon="bell" size="lg" />
+          &nbsp;&nbsp;
+          <Icon style={{ color: "white" }} icon="bell" size="lg" />
           &nbsp;&nbsp;
         </Link>
         <Link to="/chat">
-        &nbsp;&nbsp;
-          <Icon icon="comment" size="lg" />
+          &nbsp;&nbsp;
+          <Icon style={{ color: "white" }} icon="comment" size="lg" />
           &nbsp;&nbsp;
         </Link>
         <Link to="/settings">
           &nbsp;&nbsp;
-          <Icon icon="cog" size="lg" />
+          <Icon style={{ color: "white" }} icon="cog" size="lg" />
           &nbsp;&nbsp;
         </Link>
         <Link to="/settings">
@@ -93,7 +89,12 @@ class TopNav extends React.Component {
           ></Avatar>
         </Link>
         <Link to="/logout">
-          <Button className="bp3-minimal" icon="log-out" text="Logout" />
+          <Button
+            style={{ color: "white" }}
+            className="bp3-minimal"
+            icon="log-out"
+            text="Logout"
+          />
         </Link>
       </React.Fragment>
     );

@@ -16,7 +16,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // External Style Frameworks (RSuite / BlueprintJS)
-import "rsuite/dist/styles/rsuite-dark.css";
+// import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 import "../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -36,7 +37,7 @@ import HomeScreen from "./modules/dashboard";
 
 // APP
 const App = () => {
-  document.body.className = "bp3-dark";
+  // document.body.className = "bp3-dark";
   return (
     <Router>
       <div className="container">

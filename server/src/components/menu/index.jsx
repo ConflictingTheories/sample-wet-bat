@@ -68,12 +68,13 @@ class SideMenu extends React.Component {
               height: "56px",
               marginTop: "-5px",
               padding: "1px 0 0 0",
-              background: "linear-gradient(45deg,indigo,black)",
+              background: "white",
             }}
           >
             <img
               style={{ width: "56px" }}
-              src={require("../../assets/logo.svg")}
+              // src={require("../../assets/logo.svg")}
+              src={require("../../assets/wetbat-icon.png")}
             />
             {expanded && (
               <div

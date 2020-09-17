@@ -23,7 +23,8 @@ import {
   FlexboxGrid,
   Panel,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+// import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // APP STYLES
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
@@ -31,7 +32,7 @@ import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "../../styles/less/App.less";
 
 // ASSETS
-import Logo from "../../assets/logo.svg";
+import Logo from "../../assets/wetbat.png";
 
 // Services
 import { logout } from "../../services/auth";

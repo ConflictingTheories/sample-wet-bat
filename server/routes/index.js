@@ -15,14 +15,25 @@
 const express = require("express");
 const path = require("path");
 const router = express.Router({ mergeParams: true });
+const Error = require("../lib/Error");
 
 module.exports = function (_) {
   router.get("/", function (_, res) {
-    res.sendFile(path.join(__dirname, "../build/", "index.html"));
+    try {
+      res.sendFile(path.join(__dirname, "../build/", "index.html"));
+    } catch (e) {
+      Error.setError("Error", 500, e);
+      Error.sendError(res);
+    }
   });
 
   router.get("/index", function (_, res) {
-    res.sendFile(path.join(__dirname, "../build/", "index.html"));
+    try {
+      res.sendFile(path.join(__dirname, "../build/", "index.html"));
+    } catch (e) {
+      Error.setError("Error", 500, e);
+      Error.sendError(res);
+    }
   });
 
   router.use("*", express.static(__dirname + "/../build"));

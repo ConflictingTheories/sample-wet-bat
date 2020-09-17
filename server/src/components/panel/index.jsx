@@ -25,7 +25,8 @@ import {
   InputGroup,
 } from "rsuite";
 
-import "rsuite/dist/styles/rsuite-dark.css";
+// import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 class WBPanel extends Component {
   constructor(props) {

@@ -28,10 +28,11 @@ import {
   ButtonToolbar,
   Footer,
 } from "rsuite";
-import "rsuite/dist/styles/rsuite-dark.css";
+// import "rsuite/dist/styles/rsuite-dark.css";
+import "rsuite/dist/styles/rsuite-default.css";
 
 // ASSETS & APP STYLES
-import Logo from "../../assets/logo.svg";
+import Logo from "../../assets/wetbat.png";
 import "../../styles/less/App.less";
 
 // Services
