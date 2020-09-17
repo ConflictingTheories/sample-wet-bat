@@ -51,7 +51,6 @@ class QuickQuoteForm extends React.Component {
     this.clearForm = this.clearForm.bind(this);
     this.submitQuote = this.submitQuote.bind(this);
 
-    this.store = props.store;
     this.state = {
       destination: null,
       departure: null,
@@ -112,8 +111,11 @@ class QuickQuoteForm extends React.Component {
       deptId: departure,
       destId: destination,
     };
-    await createQuote(quoteDetails);
-    this.clearForm();
+    let quote = await createQuote(quoteDetails);
+    if (quote) {
+      store.quotes.push(quote);
+      this.clearForm();
+    }
   }
 
   // Event Change Handlers
@@ -122,7 +124,7 @@ class QuickQuoteForm extends React.Component {
     this.setState({ lead: newLead });
   }
   changeTour(el) {
-    const { tours } = this.store;
+    const { tours } = store;
     const newTour = el.target.value;
     const newDest = tours.filter((t) => t.id === newTour).destId;
     this.setState({ tour: newTour, destination: newDest }, () =>
@@ -162,14 +164,8 @@ class QuickQuoteForm extends React.Component {
 
   // Component
   render() {
-
     // Guarantee Refresh
-    useProps([
-      store.tours,
-      store.leads,
-      store.quotes,
-      store.airports,
-    ]);
+    useProps([store.tours, store.leads, store.quotes, store.airports]);
 
     const { airports, tours, leads } = store;
     const {

@@ -1,5 +1,5 @@
 import React from "react";
-import { collect } from "react-recollect";
+import { collect, store } from "react-recollect";
 // BLUEPRINT STYLES
 import {
   InputGroup,
@@ -45,8 +45,6 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
 
-    this.store = props.store;
-
     this.state = {
       username: "",
       password: "",
@@ -60,7 +58,7 @@ class Login extends React.Component {
 
   async componentDidMount() {
     let auth = await check();
-    this.store.auth = auth;
+    store.auth = auth;
     console.log(auth);
     if (auth.isAuth) {
       const { from } = { from: { pathname: "/" } };

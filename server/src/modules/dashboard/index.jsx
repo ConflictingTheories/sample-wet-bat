@@ -12,7 +12,7 @@
 \*                                            */
 
 import React from "react";
-import { collect, batch } from "react-recollect";
+import { collect, batch, store, useProps} from "react-recollect";
 
 // RSuite UI Library
 import {
@@ -56,7 +56,6 @@ class Dashboard extends React.Component {
     this.renderDashboardTabs = this.renderDashboardTabs.bind(this);
     this.renderQuotesList = this.renderQuotesList.bind(this);
 
-    this.store = props.store;
     this.state = {
       showCallout: true,
       leads: props.store.leads || [],
@@ -77,11 +76,11 @@ class Dashboard extends React.Component {
       console.log(leads, quotes, airports, tours);
       // Load into Store (for other page access)
       batch(() => {
-        this.store.leads = leads;
-        this.store.quotes = quotes;
-        this.store.airports = airports;
-        this.store.tours = tours;
-      })
+        store.leads = leads;
+        store.quotes = quotes;
+        store.airports = airports;
+        store.tours = tours;
+      });
       this.setState({ leads, quotes, airports, tours });
     } catch (e) {
       console.error(e);
@@ -118,7 +117,8 @@ class Dashboard extends React.Component {
   }
 
   renderLeadsList() {
-    const { leads } = this.store;
+    const { leads } = store;
+    useProps([leads]);
     return (
       <React.Fragment>
         <Table
@@ -160,7 +160,8 @@ class Dashboard extends React.Component {
   }
 
   renderToursList() {
-    const { tours } = this.store;
+    const { tours } = store;
+    useProps([tours]);
     return (
       <React.Fragment>
         <Table
@@ -190,7 +191,8 @@ class Dashboard extends React.Component {
   }
 
   renderQuotesList() {
-    const { quotes } = this.store;
+    const { quotes } = store;
+    useProps([quotes]);
     return (
       <React.Fragment>
         <Table

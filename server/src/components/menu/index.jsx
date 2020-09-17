@@ -19,12 +19,11 @@ import { Link } from "react-router-dom";
 import { Sidenav, Nav, Icon } from "rsuite";
 
 import AuthHelper from "../../helpers/authHelper";
-import { collect, batch } from "react-recollect";
+import { collect, batch, store } from "react-recollect";
 
 class SideMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.store = props.store;
 
     this.state = {
       expanded: false,
@@ -34,13 +33,13 @@ class SideMenu extends React.Component {
   }
   componentDidMount() {
     this.setState({
-      expanded: this.store.expanded || false,
+      expanded: store.expanded || false,
     });
   }
   handleToggle() {
-    let expanded = this.store.expanded ? false : true;
+    let expanded = store.expanded ? false : true;
     batch(() => {
-      this.store.expanded = expanded;
+      store.expanded = expanded;
     });
     this.setState({ expanded: expanded });
   }
