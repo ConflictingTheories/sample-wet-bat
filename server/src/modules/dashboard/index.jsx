@@ -15,15 +15,16 @@ import React from "react";
 import { collect } from "react-recollect";
 
 // RSuite UI Library
-import { Container, Content, Row, Col, Notification, Placeholder } from "rsuite";
+import {
+  Container,
+  Content,
+  Notification,
+  Placeholder,
+} from "rsuite";
 import "rsuite/dist/styles/rsuite-dark.css";
 
 // BLUEPRINT STYLES
 import {
-  Button,
-  Tabs,
-  Tab,
-  NonIdealState,
   Intent,
   Callout,
 } from "@blueprintjs/core";
@@ -34,17 +35,11 @@ import TopNav from "../../components/nav";
 import SideMenu from "../../components/menu";
 
 // ASSETS & APP STYLES
-import "../../styles/App.less";
-
-const { Paragraph } = Placeholder
+import "../../styles/less/App.less";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.store = props.store;
-
-    this.state = {};
   }
 
   renderDashboardTabs() {
@@ -61,7 +56,7 @@ class Dashboard extends React.Component {
       () =>
         Notification.open({
           title: ~~(Math.random() * 20) + " new leads available",
-          description: <Paragraph width={320} rows={3} />,
+          description: <Placeholder.Paragraph width={320} rows={3} />,
         }),
       ~~(Math.random() * 10000)
     );
@@ -85,7 +80,10 @@ class Dashboard extends React.Component {
           <Container>
             <TopNav
               isLogin={false}
-              
+              // Can be Overridden & customized
+              // renderRight={}
+              // renderBrand={}
+              // renderBar={}
             />
             <Content>{this.renderDashboardTabs()}</Content>
           </Container>

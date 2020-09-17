@@ -13,29 +13,23 @@
 
 import React from "react";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  RouteComponentProps,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// BLUEPRINT STYLES UI LIBRARY
 import {
   Button,
   Colors,
-  Blockquote,
   Navbar,
-  Elevation,
   Alignment,
-  Card,
+  ControlGroup,
+  InputGroup,
 } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
+import { Avatar, Icon } from "rsuite";
+
 // ASSETS & APP STYLES
-import "../../styles/App.less";
+import "../../styles/less/App.less";
 import { collect } from "react-recollect";
 
 // APP
@@ -62,18 +56,7 @@ class TopNav extends React.Component {
   renderBar() {
     return (
       <React.Fragment>
-        <Link to="/">
-          <Button className="bp3-minimal" icon="home" text="Dashboard" />
-        </Link>
-        <Link to="/meetings">
-          <Button className="bp3-minimal" icon="calendar" text="Meetings" />
-        </Link>
-        <Link to="/clients">
-          <Button className="bp3-minimal" icon="office" text="Clients" />
-        </Link>
-        <Link to="/stakeholders">
-          <Button className="bp3-minimal" icon="user" text="Stakeholders" />
-        </Link>
+        {/* // Nothing */}
       </React.Fragment>
     );
   }
@@ -81,8 +64,33 @@ class TopNav extends React.Component {
   renderRight() {
     return (
       <React.Fragment>
+        <ControlGroup>
+          <InputGroup></InputGroup>
+          <Button>
+            <Icon icon="search" size="lg" />
+          </Button>
+        </ControlGroup>
+        <Link to="/notifications">
+        &nbsp;&nbsp;
+          <Icon icon="bell" size="lg" />
+          &nbsp;&nbsp;
+        </Link>
+        <Link to="/chat">
+        &nbsp;&nbsp;
+          <Icon icon="comment" size="lg" />
+          &nbsp;&nbsp;
+        </Link>
         <Link to="/settings">
-          <Button className="bp3-minimal" icon="badge" text="Account" />
+          &nbsp;&nbsp;
+          <Icon icon="cog" size="lg" />
+          &nbsp;&nbsp;
+        </Link>
+        <Link to="/settings">
+          <Avatar
+            src={
+              "https://www.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
+            }
+          ></Avatar>
         </Link>
         <Link to="/logout">
           <Button className="bp3-minimal" icon="log-out" text="Logout" />

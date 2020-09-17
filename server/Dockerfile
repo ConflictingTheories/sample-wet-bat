@@ -36,8 +36,8 @@ ENV ENABLE_AUTH=${ENABLE_AUTH}
 WORKDIR /opt
 RUN mkdir wetbat
 WORKDIR /opt/wetbat
-COPY . .
 # Build Source
+COPY . .
 RUN yarn
 RUN yarn build
 # Expose Ports

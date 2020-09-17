@@ -28,7 +28,7 @@ import "rsuite/dist/styles/rsuite-dark.css";
 // APP STYLES
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
-import "../../styles/App.less";
+import "../../styles/less/App.less";
 
 // ASSETS
 import Logo from "../../assets/logo.svg";
@@ -36,9 +36,8 @@ import Logo from "../../assets/logo.svg";
 // Services
 import { logout } from "../../services/auth";
 
-// Helpers
-import StyleHelper from '../../helpers/styleHelper';
-const colors = StyleHelper.getColors();
+// Colors
+import colors from "../../styles/colors";
 
 class Logout extends React.Component {
   async componentDidMount() {
@@ -55,7 +54,7 @@ class Logout extends React.Component {
     return (
       <Container
         style={{
-          background: colors["@primaryGrad"],
+          background: colors.primaryGrad,
         }}
       >
         <Header></Header>
@@ -67,13 +66,13 @@ class Logout extends React.Component {
                 style={{ backgroundColor: "transparent" }}
               >
                 <Panel bodyFill>
-                  <Container style={{ backgroundColor: "#30404d" }}>
+                  <Container style={{ backgroundColor: colors.secondaryColor }}>
                     <Sidebar style={{ width: "320px" }}>
                       <img
                         src={Logo}
                         height="320"
                         style={{
-                          background: colors["@secondaryGrad"],
+                          background: colors.secondaryGrad,
                         }}
                       />
                     </Sidebar>

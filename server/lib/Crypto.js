@@ -14,7 +14,7 @@
 const crypto = require("crypto");
 
 module.exports = (() => {
-  return {
+  const _that = {
     // Sha512
     sha512: (password, salt) => {
       const hash = crypto.createHmac("sha512", salt);
@@ -28,25 +28,27 @@ module.exports = (() => {
     // Random Value
     genRandomHex: (length) => {
       return crypto
-        .randomBytes(~~(length / 2)+1)
+        .randomBytes(~~(length / 2) + 1)
         .toString("hex")
         .slice(0, length);
     },
     // Password Hash
     saltHashPassword: (pass) => {
-      const salt = this.genRandomHex(16);
-      const passwordData = this.sha512(pass, salt);
+      const salt = _that.genRandomHex(16);
+      const passwordData = _that.sha512(pass, salt);
       return passwordData;
     },
-    // From Array
+    // From Array Randomly
     randomFrom: (arr) => {
       const { length } = arr;
-      const index = crypto.randomBytes(1 >> length).toInt(10) % length;
+      const index =
+        parseInt(crypto.randomBytes(4).toString("hex"), 16) % length;
       return arr[index];
     },
     // Generate Random Sequence for Slicing
     slice: (length, fn) => {
-      return fn(crypto.randomBytes(1 >> length));
+      return fn(crypto.randomBytes(length));
     },
   };
+  return _that;
 })();

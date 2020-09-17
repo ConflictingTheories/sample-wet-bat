@@ -14,11 +14,11 @@
 $env:BUILD_PATH="$(Get-Location)"
 Set-Location $env:BUILD_PATH;
 
-foreach( $line in $(Get-Content "$env:BUILD_PATH\.env")){
+foreach($line in [System.IO.File]::ReadLines("$env:BUILD_PATH\.env")) {
     $envData = $line.Split('=')
-    Write-Output "$($envData.get(0))=$($envData.get(1))"
     [Environment]::SetEnvironmentVariable($envData.get(0), $envData.get(1), "User")   
 }
+
 
 # Deploy
 docker-compose build

@@ -14,24 +14,14 @@
 import React from "react";
 
 import {
-  BrowserRouter as Router,
-  Route,
   Link,
-  Switch,
-  RouteComponentProps,
 } from "react-router-dom";
 
 // RSuite UI Library
 import {
   Sidenav,
-  Toggle,
-  Navbar,
   Nav,
-  Dropdown,
   Icon,
-  Sidebar,
-  Row,
-  Col,
 } from "rsuite";
 
 import AuthHelper from "../../helpers/authHelper";
@@ -90,7 +80,6 @@ class SideMenu extends React.Component {
                 style={{
                   display: "inline-block",
                   fontSize: "22px",
-                  fontFamily: "amerika-sans",
                 }}
               >
                 Wet Bat
@@ -127,7 +116,7 @@ class SideMenu extends React.Component {
               <Nav.Item
                 active={"2" == activeKey}
                 eventKey="2"
-                icon={<Icon icon="calendar" />}
+                icon={<Icon icon="ticket" />}
               >
                 Quote
               </Nav.Item>
@@ -136,7 +125,7 @@ class SideMenu extends React.Component {
               <Nav.Item
                 active={"3" == activeKey}
                 eventKey="3"
-                icon={<Icon icon="building" />}
+                icon={<Icon icon="user" />}
               >
                 Leads
               </Nav.Item>
@@ -145,7 +134,7 @@ class SideMenu extends React.Component {
               <Nav.Item
                 active={"4" == activeKey}
                 eventKey="4"
-                icon={<Icon icon="group" />}
+                icon={<Icon icon="certificate" />}
               >
                 Tours
               </Nav.Item>
@@ -156,36 +145,36 @@ class SideMenu extends React.Component {
               <Nav.Item
                 active={"5" == activeKey}
                 eventKey="5"
-                icon={<Icon icon="dashboard" />}
+                icon={<Icon icon="file" />}
               >
-                Home
+                Invoices
               </Nav.Item>
             </Link>
             <Link to="/analytics">
               <Nav.Item
                 active={"6" == activeKey}
                 eventKey="6"
-                icon={<Icon icon="calendar" />}
+                icon={<Icon icon="line-chart" />}
               >
-                Quote
+                Analytics
               </Nav.Item>
             </Link>
             <Link to="/teams">
               <Nav.Item
                 active={"7" == activeKey}
                 eventKey="7"
-                icon={<Icon icon="building" />}
+                icon={<Icon icon="group" />}
               >
-                Leads
+                Teams
               </Nav.Item>
             </Link>
             <Link to="/admin">
               <Nav.Item
                 active={"4" == activeKey}
                 eventKey="4"
-                icon={<Icon icon="group" />}
+                icon={<Icon icon="wrench" />}
               >
-                Tours
+                Admin
               </Nav.Item>
             </Link>
           </Nav>
@@ -194,12 +183,12 @@ class SideMenu extends React.Component {
               <Nav.Item
                 active={"5" == activeKey}
                 eventKey="5"
-                icon={<Icon icon="gear" />}
+                icon={<Icon icon="question" />}
               >
-                Settings
+                Support
               </Nav.Item>
             </Link>
-            <Link to="/logout">
+            {/* <Link to="/logout">
               <Nav.Item
                 active={"6" == activeKey}
                 eventKey="6"
@@ -207,7 +196,7 @@ class SideMenu extends React.Component {
               >
                 Logout
               </Nav.Item>
-            </Link>
+            </Link> */}
           </Nav>
         </Sidenav.Body>
       </Sidenav>

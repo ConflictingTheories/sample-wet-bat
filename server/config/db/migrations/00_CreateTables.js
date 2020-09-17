@@ -42,7 +42,7 @@ module.exports = (DB) => {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          createtAt: DataTypes.DATE,
+          createdAt: DataTypes.DATE,
           updatedAt: DataTypes.DATE,
         }),
         // Tours
@@ -57,7 +57,7 @@ module.exports = (DB) => {
           description: DataTypes.STRING,
           startDate: DataTypes.DATE,
           endDate: DataTypes.DATE,
-          createtAt: DataTypes.DATE,
+          createdAt: DataTypes.DATE,
           updatedAt: DataTypes.DATE,
         }),
         // Quotes
@@ -73,7 +73,7 @@ module.exports = (DB) => {
           travellers: DataTypes.INTEGER,
           transport: DataTypes.ENUM("none", "rental", "own"),
           cost: DataTypes.FLOAT,
-          createtAt: DataTypes.DATE,
+          createdAt: DataTypes.DATE,
           updatedAt: DataTypes.DATE,
         }),
         // Airports
@@ -86,7 +86,7 @@ module.exports = (DB) => {
           },
           tag: DataTypes.STRING,
           name: DataTypes.STRING,
-          createtAt: DataTypes.DATE,
+          createdAt: DataTypes.DATE,
           updatedAt: DataTypes.DATE,
         }),
         // Leads
@@ -102,7 +102,7 @@ module.exports = (DB) => {
           email: DataTypes.STRING,
           city: DataTypes.STRING,
           preferredContact: DataTypes.ENUM("phone", "email", "sms"),
-          createtAt: DataTypes.DATE,
+          createdAt: DataTypes.DATE,
           updatedAt: DataTypes.DATE,
         }),
       ]);
