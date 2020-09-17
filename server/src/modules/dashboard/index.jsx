@@ -12,7 +12,7 @@
 \*                                            */
 
 import React from "react";
-import { collect } from "react-recollect";
+import { collect, batch } from "react-recollect";
 
 // RSuite UI Library
 import {
@@ -35,6 +35,11 @@ import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 import TopNav from "../../components/nav";
 import SideMenu from "../../components/menu";
 
+// SERVICES
+import * as Leads from "../../services/leads";
+import * as Quotes from "../../services/quotes";
+import * as Tours from "../../services/tours";
+
 // ASSETS & APP STYLES
 import "../../styles/less/App.less";
 import Logo from "../../assets/wetbat.png";
@@ -42,30 +47,89 @@ import Logo from "../../assets/wetbat.png";
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.renderLeadsList = this.renderLeadsList.bind(this);
+    this.renderQuotePanel = this.renderQuotePanel.bind(this);
+    this.renderDashboardTabs = this.renderDashboardTabs.bind(this);
+    this.renderQuotesList = this.renderQuotesList.bind(this);
+
+    this.store = props.store;
+    this.state = {
+      showCallout: true,
+      leads: props.store.leads || [],
+      quotes: props.store.quotes || [],
+      airports: props.store.airports || [],
+      tours: props.store.tours || [],
+      skipLoad: props.skipLoad || false
+    };
   }
 
   async componentDidMount() {
-    // TODO: Fetch Data from API
-    // DataSets
-    // Fetch Tours
-    // Fetch Airports
-    // Fetch Leads
-    // Fetch Quotes
+    // Fetch Datasets
+    let leads = this.state.skipLoad ? this.state.leads : (await Leads.getAll());
+    let quotes = this.state.skipLoad ? this.state.quotes : (await Quotes.getAll());
+    let airports = this.state.skipLoad ? this.state.airports : (await Tours.getAirports());
+    let tours = this.state.skipLoad ? this.state.tours : (await Tours.getAll());
+
+    // Load into Store (for other page access)
+    this.setState({ leads, quotes, airports, tours }, () =>
+      batch(() => {
+        this.store.leads = leads;
+        this.store.quotes = quotes;
+        this.store.airports = airports;
+        this.store.tours = leads;
+      })
+    );
+
+    // Callout Display
+    setTimeout(() => {
+      this.setState({ showCallout: false });
+    }, 3000);
+
     // TODO: Fetch User Info
-    // Calculate Revenue
-    // Calculate Etc..
+
+    // TODO: Calculate Revenue
+
+    // TODO: Calculate Etc..
   }
 
-  renderQuotePanel() {}
+  renderQuotePanel() {
+    return <React.Fragment>{/* //Form  */}</React.Fragment>;
+  }
 
-  renderLeadsList() {}
-
-  renderQuotesList() {}
-
-  renderDashboardTabs() {
+  renderLeadsList() {
+    const { leads } = this.state;
     return (
       <React.Fragment>
-        <Callout intent={Intent.SUCCESS} title={"Wet Bat Loaded"}></Callout>
+        <ul>
+          {leads.map((x) => (
+            <li>x</li>
+          ))}
+        </ul>
+      </React.Fragment>
+    );
+  }
+
+  renderQuotesList() {
+    const { quotes } = this.state;
+    return (
+      <React.Fragment>
+        <ul>
+          {quotes.map((x) => (
+            <li>x</li>
+          ))}
+        </ul>
+      </React.Fragment>
+    );
+  }
+
+  renderDashboardTabs() {
+    const { showCallout } = this.state;
+    return (
+      <React.Fragment>
+        {showCallout ? (
+          <Callout intent={Intent.SUCCESS} title={"Wet Bat Loaded"}></Callout>
+        ) : null}
         <Row>
           <Col>
             <Panel bordered>
