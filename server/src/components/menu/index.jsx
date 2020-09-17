@@ -13,16 +13,10 @@
 
 import React from "react";
 
-import {
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // RSuite UI Library
-import {
-  Sidenav,
-  Nav,
-  Icon,
-} from "rsuite";
+import { Sidenav, Nav, Icon } from "rsuite";
 
 import AuthHelper from "../../helpers/authHelper";
 import { collect, batch } from "react-recollect";

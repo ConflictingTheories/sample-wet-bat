@@ -32,6 +32,7 @@ import { Intent, Callout } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
+// COMPONENTS
 import TopNav from "../../components/nav";
 import SideMenu from "../../components/menu";
 
@@ -72,7 +73,7 @@ class Dashboard extends React.Component {
     let tours = await Tours.getAll();
 
     console.log(leads, quotes, airports, tours);
-    
+
     // Load into Store (for other page access)
     this.setState({ leads, quotes, airports, tours }, () =>
       batch(() => {
@@ -83,9 +84,19 @@ class Dashboard extends React.Component {
       })
     );
 
+    // Provide example "Notification"
+    setTimeout(
+      () =>
+        Notification.open({
+          title: ~~(Math.random() * 20) + " new leads available",
+          description: <Placeholder.Paragraph width={320} rows={3} />,
+        }),
+      ~~(Math.random() * 10000)
+    );
+
     // Hide Callout Display
     setTimeout(() => {
-      this.setState({ showCallout: true });
+      this.setState({ showCallout: false });
     }, 3000);
 
     // TODO: Fetch User Info
@@ -129,9 +140,9 @@ class Dashboard extends React.Component {
     const { showCallout } = this.state;
     return (
       <React.Fragment>
-        {showCallout ? (
+        {showCallout && (
           <Callout intent={Intent.SUCCESS} title={"Wet Bat Loaded"}></Callout>
-        ) : null}
+        )}
         <Row>
           <Col>
             <Panel bordered>
@@ -205,18 +216,6 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
       </React.Fragment>
-    );
-  }
-
-  async componentDidMount() {
-    // Provide example "Notification"
-    setTimeout(
-      () =>
-        Notification.open({
-          title: ~~(Math.random() * 20) + " new leads available",
-          description: <Placeholder.Paragraph width={320} rows={3} />,
-        }),
-      ~~(Math.random() * 10000)
     );
   }
 

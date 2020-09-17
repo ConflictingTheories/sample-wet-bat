@@ -12,7 +12,6 @@
 \*                                            */
 
 const express = require("express");
-const { catch } = require("../../config/db/migrate");
 const router = express.Router({
   mergeParams: true,
 });

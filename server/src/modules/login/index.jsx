@@ -39,7 +39,7 @@ import "../../styles/less/App.less";
 import { login, check } from "../../services/auth";
 
 // Colors
-import colors from '../../styles/colors';
+import colors from "../../styles/colors";
 
 class Login extends React.Component {
   constructor(props) {

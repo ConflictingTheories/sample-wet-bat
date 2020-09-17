@@ -21,7 +21,7 @@ module.exports = (DB) => {
   const Quote = require('../../models/Quote')(DB);
 
   // GET /
-  router.get("/", (req, res) => {
+  router.get("/", async (req, res) => {
     try {
       const quotes = await Quote.findAll();
       res.json(quotes.get());
@@ -31,7 +31,7 @@ module.exports = (DB) => {
     }
   });
 
-  router.get("/:id", (req, res) => {
+  router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
       // Fetch by User Id

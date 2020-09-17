@@ -23,7 +23,7 @@ module.exports = (DB) => {
   const Airport = require('../../models/Airport')(DB);
 
   // GET /  -- Get Tours
-  router.get("/", (req, res) => {
+  router.get("/", async (req, res) => {
     try {
       let tours = await Tour.findAll();
       res.json(tours.get());
@@ -34,7 +34,7 @@ module.exports = (DB) => {
   });
 
   // GET /airports -- Return Airports
-  router.get("/airports", (_, res) => {
+  router.get("/airports", async (_, res) => {
     try {
       let airports = await Airport.findAll();
       res.json(airports.get());

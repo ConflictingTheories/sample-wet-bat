@@ -12,7 +12,6 @@
 \*                                            */
 
 const express = require("express");
-const { catch } = require("../../config/db/migrate");
 const router = express.Router({
   mergeParams: true,
 });
@@ -22,7 +21,7 @@ module.exports = (DB) => {
   const Lead = require('../../models/Lead')(DB);
 
   // GET /
-  router.get("/", (req, res) => {
+  router.get("/", async (req, res) => {
     try {
      let leads = await Lead.findAll();
       res.json(leads.get());
