@@ -18,6 +18,9 @@ const router = express.Router({ mergeParams: true });
 const Error = require("../lib/Error");
 
 module.exports = function (_) {
+
+  router.use("*", express.static(__dirname + "/../build"));
+
   router.get("/", function (_, res) {
     try {
       res.sendFile(path.join(__dirname, "../build/", "index.html"));
@@ -35,8 +38,6 @@ module.exports = function (_) {
       Error.sendError(res);
     }
   });
-
-  router.use("*", express.static(__dirname + "/../build"));
 
   return router;
 };

@@ -13,6 +13,7 @@
 
 import ApiHelper from "../helpers/apiHelper";
 
+// GET /quotes
 export async function getAll() {
   return ApiHelper.get(`/quotes`).then((quotes: any) => {
     console.log(quotes);
@@ -20,6 +21,7 @@ export async function getAll() {
   });
 }
 
+// GET /quotes/:id
 export async function getByUserId(id:number) {
   return ApiHelper.get(`/quotes/${id}`).then((quotes: any) => {
     console.log(quotes);

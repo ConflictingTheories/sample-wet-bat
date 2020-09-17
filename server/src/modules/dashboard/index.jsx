@@ -60,17 +60,19 @@ class Dashboard extends React.Component {
       quotes: props.store.quotes || [],
       airports: props.store.airports || [],
       tours: props.store.tours || [],
-      skipLoad: props.skipLoad || false
+      skipLoad: props.skipLoad || false,
     };
   }
 
   async componentDidMount() {
     // Fetch Datasets
-    let leads = this.state.skipLoad ? this.state.leads : (await Leads.getAll());
-    let quotes = this.state.skipLoad ? this.state.quotes : (await Quotes.getAll());
-    let airports = this.state.skipLoad ? this.state.airports : (await Tours.getAirports());
-    let tours = this.state.skipLoad ? this.state.tours : (await Tours.getAll());
+    let leads = await Leads.getAll();
+    let quotes = await Quotes.getAll();
+    let airports = await Tours.getAirports();
+    let tours = await Tours.getAll();
 
+    console.log(leads, quotes, airports, tours);
+    
     // Load into Store (for other page access)
     this.setState({ leads, quotes, airports, tours }, () =>
       batch(() => {
@@ -81,9 +83,9 @@ class Dashboard extends React.Component {
       })
     );
 
-    // Callout Display
+    // Hide Callout Display
     setTimeout(() => {
-      this.setState({ showCallout: false });
+      this.setState({ showCallout: true });
     }, 3000);
 
     // TODO: Fetch User Info

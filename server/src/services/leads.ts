@@ -13,6 +13,7 @@
 
 import ApiHelper from "../helpers/apiHelper";
 
+// GET /leads
 export async function getAll() {
   return ApiHelper.get(`/leads`).then((leads: any) => {
     console.log(leads);

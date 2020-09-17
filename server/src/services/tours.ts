@@ -13,6 +13,7 @@
 
 import ApiHelper from "../helpers/apiHelper";
 
+// GET /tours
 export async function getAll() {
   return ApiHelper.get(`/tours`).then((tours: any) => {
     console.log(tours);
@@ -20,6 +21,7 @@ export async function getAll() {
   });
 }
 
+// GET /tours/airports
 export async function getAirports() {
   return ApiHelper.get(`/tours/airports`).then((airports: any) => {
     console.log(airports);

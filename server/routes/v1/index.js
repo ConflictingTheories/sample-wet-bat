@@ -22,9 +22,17 @@ const FF = require("../../config/featureFlags");
 module.exports = (DB) => {
   // API Routes (V1)
   const auth = require("./auth.js")(DB);
+  const leads = require("./leads.js")(DB);
+  const quotes = require("./quotes.js")(DB);
+  const tours = require("./tours.js")(DB);
 
-  // Auth
+  // Auth (Feature Flag)
   if (FF.ENABLE_AUTH) router.use("/auth", auth);
+
+  // API
+  router.use("/leads", leads);
+  router.use("/quotes", quotes);
+  router.use("/tours", tours);
 
   // Return Router
   return router;
