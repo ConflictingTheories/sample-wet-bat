@@ -44,7 +44,7 @@ module.exports = (DB) => {
     }
   });
 
-  // GET /:id
+  // POST /create
   router.post("/create", async (req, res) => {
     try {
       const {

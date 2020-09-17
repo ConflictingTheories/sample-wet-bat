@@ -26,7 +26,6 @@ module.exports = (DB) => {
             startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
             endDate: new Date(Date.now() + 24 * 24 * 60 * 60 * 1000),
           });
-          await Airport.create(x);
         });
     },
   };
