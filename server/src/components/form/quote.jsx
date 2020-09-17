@@ -22,16 +22,15 @@ import {
   Alignment,
   ControlGroup,
   InputGroup,
-  FormGroup,
 } from "@blueprintjs/core";
 import "../../../node_modules/@blueprintjs/core/lib/css/blueprint.css";
 import "../../../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-import { Avatar, Icon, Panel } from "rsuite";
+import { Avatar, Icon, Panel, Form, FormGroup, FormControl } from "rsuite";
 
 // ASSETS & APP STYLES
 import "../../styles/less/App.less";
-import { collect } from "react-recollect";
+import { collect, useProps, store } from "react-recollect";
 
 import { create as createQuote } from "../../services/quotes";
 
@@ -39,6 +38,7 @@ import { create as createQuote } from "../../services/quotes";
 class QuickQuoteForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.changeTour = this.changeTour.bind(this);
     this.changeDeparture = this.changeDeparture.bind(this);
     this.changeLead = this.changeLead.bind(this);
@@ -46,8 +46,11 @@ class QuickQuoteForm extends React.Component {
     this.changeReturnDate = this.changeReturnDate.bind(this);
     this.changeTransportation = this.changeTransportation.bind(this);
     this.changeTravellers = this.changeTravellers.bind(this);
+    this.changeArrival = this.changeArrival.bind(this);
     this.updateCost = this.updateCost.bind(this);
     this.clearForm = this.clearForm.bind(this);
+    this.submitQuote = this.submitQuote.bind(this);
+
     this.store = props.store;
     this.state = {
       destination: null,
@@ -60,6 +63,7 @@ class QuickQuoteForm extends React.Component {
       travellers: 1,
       transport: "none",
     };
+    // Watch for External Updates / Loads / Refreshes
   }
 
   // Randomize Cost
@@ -83,6 +87,7 @@ class QuickQuoteForm extends React.Component {
     });
   }
 
+  // Submit new Quote
   async submitQuote() {
     const {
       departureDate,
@@ -111,11 +116,11 @@ class QuickQuoteForm extends React.Component {
     this.clearForm();
   }
 
+  // Event Change Handlers
   changeLead(el) {
     const newLead = el.target.value;
     this.setState({ lead: newLead });
   }
-
   changeTour(el) {
     const { tours } = this.store;
     const newTour = el.target.value;
@@ -124,12 +129,14 @@ class QuickQuoteForm extends React.Component {
       this.updateCost()
     );
   }
-
   changeDeparture(el) {
     const newLead = el.target.value;
-    this.setState({ lead: newLead }, () => this.updateCost());
+    this.setState({ departure: newLead }, () => this.updateCost());
   }
-
+  changeArrival(el) {
+    const newLead = el.target.value;
+    this.setState({ destination: newLead }, () => this.updateCost());
+  }
   changeDeptDate(el) {
     const newLead = el.target.value;
     // TODO: Filter Tours by Availability
@@ -137,112 +144,152 @@ class QuickQuoteForm extends React.Component {
       this.updateCost()
     );
   }
-
   changeReturnDate(el) {
     const newLead = el.target.value;
     // TODO: Filter Tours by Availability
     this.setState({ returnDate: new Date(newLead) }, () => this.updateCost());
   }
-
   changeTravellers(el) {
     const newLead = el.target.value;
     // TODO: Filter Tours by Availability
     this.setState({ travellers: newLead }, () => this.updateCost());
   }
-
   changeTransportation(el) {
     const newLead = el.target.value;
     // TODO: Filter Tours by Availability
     this.setState({ transport: newLead }, () => this.updateCost());
   }
 
+  // Component
   render() {
-    const { airports, tours, leads } = this.store;
-    const { destination, departure, tour, lead } = this.state;
+
+    // Guarantee Refresh
+    useProps([
+      store.tours,
+      store.leads,
+      store.quotes,
+      store.airports,
+    ]);
+
+    const { airports, tours, leads } = store;
+    const {
+      destination,
+      departure,
+      tour,
+      lead,
+      departureDate,
+      returnDate,
+      travellers,
+      transport,
+    } = this.state;
     return (
       <Panel>
-        <FormGroup>
-          <ControlGroup>
-            <select onChange={this.changeTour}>
-              {tours &&
-                tours.map((t) => {
-                  t.id == tour ? (
-                    <option selected value={t.id}>
-                      {t.destination}
-                    </option>
-                  ) : (
-                    <option value={t.id}>{tours.destination}</option>
-                  );
-                })}
-            </select>
-          </ControlGroup>
-          <ControlGroup>
-            <select onChange={this.changeLead}>
-              {leads &&
-                leads.map((l) => {
-                  l.id == lead ? (
-                    <option selected value={l.id}>
-                      {l.name}
-                    </option>
-                  ) : (
-                    <option value={l.id}>{l.name}</option>
-                  );
-                })}
-            </select>
-          </ControlGroup>
-          <ControlGroup>
-            <label>Departure Airport</label>
-            <select onChange={this.changeDeparture}>
-              {airports &&
-                airports
-                  .filter((a) => a.id !== destination)
-                  .map((a) => {
-                    a.id == departure ? (
-                      <option selected value={a.id}>
-                        {a.name}
+        <Form fluid>
+          <FormGroup>
+            <ControlGroup>
+              <label>Select Tour</label>
+              <select onChange={this.changeTour}>
+                {tours &&
+                  tours.map((t) => {
+                    return t.id == tour ? (
+                      <option selected value={t.id}>
+                        {t.destination}
                       </option>
                     ) : (
-                      <option value={a.id}>{a.name}</option>
+                      <option value={t.id}>{t.destination}</option>
                     );
                   })}
-            </select>
-          </ControlGroup>
-          <ControlGroup>
-            <label>Arrival Airport</label>
-            <select disabled>
-              {airports &&
-                airports
-                  .filter((airport) => airport.id === destination)
-                  .map((airport) => {
-                    <option value={airport.id}>{airport.name}</option>;
+              </select>
+            </ControlGroup>
+            <ControlGroup>
+              <label>Select Lead</label>
+              <select onChange={this.changeLead}>
+                {leads &&
+                  leads.map((l) => {
+                    return l.id == lead ? (
+                      <option selected value={l.id}>
+                        {l.name}
+                      </option>
+                    ) : (
+                      <option value={l.id}>{l.name}</option>
+                    );
                   })}
-            </select>
-          </ControlGroup>
-          <ControlGroup>
-            <label>Departure Date</label>
-            <InputGroup value={departureDate} onChange={this.changeDeptDate} />
-          </ControlGroup>
-          <ControlGroup>
-            <label>Return Date</label>
-            <InputGroup value={returnDate} onChange={this.changeReturnDate} />
-          </ControlGroup>
-          <ControlGroup>
-            <label># of Travellers</label>
-            <InputGroup
-              type={"number"}
-              value={travellers}
-              onChange={this.changeTravellers}
-            />
-          </ControlGroup>
-          <ControlGroup>
-            <label>Transportation</label>
-            <select onChange={this.changeTransportation}>
-              <option value={"none"}></option>
-              <option value={"rental"}></option>
-              <option value={"own"}></option>
-            </select>
-          </ControlGroup>
-        </FormGroup>
+              </select>
+            </ControlGroup>
+          </FormGroup>
+          <FormGroup>
+            <ControlGroup>
+              <label>Departure Airport</label>
+              <select onChange={this.changeDeparture}>
+                {airports &&
+                  airports
+                    .filter((a) => a.id !== destination)
+                    .map((a) => {
+                      return a.id == departure ? (
+                        <option selected value={a.id}>
+                          {a.name}
+                        </option>
+                      ) : (
+                        <option value={a.id}>{a.name}</option>
+                      );
+                    })}
+              </select>
+            </ControlGroup>
+            <ControlGroup>
+              <label>Arrival Airport</label>
+              <select onChange={this.changeArrival}>
+                {airports &&
+                  airports
+                    .filter((a) => a.id !== departure)
+                    .map((a) => {
+                      return a.id == destination ? (
+                        <option selected value={a.id}>
+                          {a.name}
+                        </option>
+                      ) : (
+                        <option value={a.id}>{a.name}</option>
+                      );
+                    })}
+              </select>
+            </ControlGroup>
+          </FormGroup>
+          <FormGroup>
+            <ControlGroup>
+              <label>Departure Date</label>
+              <InputGroup
+                value={departureDate}
+                onChange={this.changeDeptDate}
+              />
+            </ControlGroup>
+            <ControlGroup>
+              <label>Return Date</label>
+              <InputGroup value={returnDate} onChange={this.changeReturnDate} />
+            </ControlGroup>
+          </FormGroup>
+          <FormGroup>
+            <ControlGroup>
+              <label># of Travellers</label>
+              <InputGroup
+                type={"number"}
+                value={travellers}
+                onChange={this.changeTravellers}
+              />
+            </ControlGroup>
+            <ControlGroup>
+              <label>Transportation</label>
+              <select onChange={this.changeTransportation}>
+                <option value={"none"}>None</option>
+                <option value={"rental"}>Rental</option>
+                <option value={"own"}>Own Vehicle</option>
+              </select>
+            </ControlGroup>
+          </FormGroup>
+          <FormGroup>
+            <ControlGroup>
+              <Button onClick={this.submitQuote}>Submit Quote</Button>
+            </ControlGroup>
+          </FormGroup>
+        </Form>
       </Panel>
     );
   }

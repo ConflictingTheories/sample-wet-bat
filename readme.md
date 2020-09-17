@@ -1,6 +1,21 @@
 # Wet Bat - Travel Made Simple (Sample SPA / PoC)
 Wet Bat is a proof of concept SPA showcasing various technologies. The purpose of this is to show a simple PoC for a theoretical company known as Wet Bat.
 
+It is designed to showcase the following technologies and full stack experience:
+* Frontend
+  * React
+* Database (Relational)
+  * ORM
+  * Migrations
+  * Seeding
+* API Design
+  * RESTful
+  * Routing
+* Data Fetching
+  * Fetch / Web Workers
+* Docker Deployment
+  * Turnkey Start
+
 ## Dependencies (to deploy)
 The Following Technologies are required to run and deploy NERD:
 - Docker / Docker-Compose

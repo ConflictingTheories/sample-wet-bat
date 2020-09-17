@@ -1,6 +1,18 @@
 {
   "cities": ["Calgary", "Edmonton", "Vancouver"],
   "contactMethods": ["phone", "email", "sms"],
+  "tours": [
+    {
+      "name": "A Tour of China",
+      "destination": "China",
+      "description": "Explore the Great Wall and Forbidden City!"
+    },
+    {
+      "name": "A Tour of Nevada",
+      "destination": "Nevada Desert",
+      "description": "Drink! Gamble! Shoot! *Wink*"
+    }
+  ],
   "firstNames": [
     "Harry",
     "Jim",

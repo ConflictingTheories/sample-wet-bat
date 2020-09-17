@@ -22,7 +22,7 @@ var location: Location;
 // API Helper Class
 class ApiHelper {
   static host: string = process.env.API_HOST || "https://wetbat.kderbyma.com";
-  static port: number = parseInt(process.env.APP_PORT || "80");
+  static port: number = parseInt(process.env.APP_PORT || "443");
   static ver: string = process.env.API_VERSION || "v1";
   // GET
   static get = async (path: string, queryObj: any = {}) => {

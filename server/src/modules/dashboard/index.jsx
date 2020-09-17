@@ -23,6 +23,7 @@ import {
   Row,
   Col,
   Panel,
+  Table,
 } from "rsuite";
 // import "rsuite/dist/styles/rsuite-dark.css";
 import "rsuite/dist/styles/rsuite-default.css";
@@ -75,14 +76,13 @@ class Dashboard extends React.Component {
       let tours = await Tours.getAll();
       console.log(leads, quotes, airports, tours);
       // Load into Store (for other page access)
-      this.setState({ leads, quotes, airports, tours }, () =>
-        batch(() => {
-          this.store.leads = leads;
-          this.store.quotes = quotes;
-          this.store.airports = airports;
-          this.store.tours = leads;
-        })
-      );
+      batch(() => {
+        this.store.leads = leads;
+        this.store.quotes = quotes;
+        this.store.airports = airports;
+        this.store.tours = tours;
+      })
+      this.setState({ leads, quotes, airports, tours });
     } catch (e) {
       console.error(e);
     }
@@ -108,7 +108,7 @@ class Dashboard extends React.Component {
 
     // TODO: Calculate Etc..
   }
-  
+
   renderQuotePanel() {
     return (
       <React.Fragment>
@@ -118,27 +118,94 @@ class Dashboard extends React.Component {
   }
 
   renderLeadsList() {
-    const { leads } = this.state;
+    const { leads } = this.store;
     return (
       <React.Fragment>
-        <ul>
-          {leads.map((x) => (
-            <li>x</li>
-          ))}
-        </ul>
+        <Table
+          virtualized
+          height={400}
+          data={leads}
+          onRowClick={(data) => {
+            console.log(data);
+            this.setState({ lead: data.id });
+          }}
+        >
+          <Table.Column width={70} align="center" fixed>
+            <Table.HeaderCell>Id</Table.HeaderCell>
+            <Table.Cell dataKey="id" />
+          </Table.Column>
+          <Table.Column width={130}>
+            <Table.HeaderCell>name</Table.HeaderCell>
+            <Table.Cell dataKey="name" />
+          </Table.Column>
+          <Table.Column width={130}>
+            <Table.HeaderCell>Phone</Table.HeaderCell>
+            <Table.Cell dataKey="phone" />
+          </Table.Column>
+          <Table.Column width={200}>
+            <Table.HeaderCell>Email</Table.HeaderCell>
+            <Table.Cell dataKey="email" />
+          </Table.Column>
+          <Table.Column width={200}>
+            <Table.HeaderCell>City</Table.HeaderCell>
+            <Table.Cell dataKey="city" />
+          </Table.Column>
+          <Table.Column width={200}>
+            <Table.HeaderCell>Preferred Method</Table.HeaderCell>
+            <Table.Cell dataKey="preferredContact" />
+          </Table.Column>
+        </Table>
+      </React.Fragment>
+    );
+  }
+
+  renderToursList() {
+    const { tours } = this.store;
+    return (
+      <React.Fragment>
+        <Table
+          virtualized
+          height={400}
+          data={tours}
+          onRowClick={(data) => {
+            console.log(data);
+            this.setState({ lead: data.id });
+          }}
+        >
+          <Table.Column width={70} align="center" fixed>
+            <Table.HeaderCell>Id</Table.HeaderCell>
+            <Table.Cell dataKey="id" />
+          </Table.Column>
+          <Table.Column width={130}>
+            <Table.HeaderCell>Destination</Table.HeaderCell>
+            <Table.Cell dataKey="destination" />
+          </Table.Column>
+          <Table.Column width={130}>
+            <Table.HeaderCell>Description</Table.HeaderCell>
+            <Table.Cell dataKey="description" />
+          </Table.Column>
+        </Table>
       </React.Fragment>
     );
   }
 
   renderQuotesList() {
-    const { quotes } = this.state;
+    const { quotes } = this.store;
     return (
       <React.Fragment>
-        <ul>
-          {quotes.map((x) => (
-            <li>x</li>
-          ))}
-        </ul>
+        <Table
+          virtualized
+          height={400}
+          data={quotes}
+          onRowClick={(data) => {
+            console.log(data);
+          }}
+        >
+          <Table.Column width={70} align="center" fixed>
+            <Table.HeaderCell>Id</Table.HeaderCell>
+            <Table.Cell dataKey="id" />
+          </Table.Column>
+        </Table>
       </React.Fragment>
     );
   }
@@ -167,22 +234,16 @@ class Dashboard extends React.Component {
         <Row>
           <Col md={8}>
             <Panel bordered header="Quick Quote">
-              {" "}
-              <Placeholder.Paragraph width={320} rows={5} />
               {this.renderQuotePanel()}
             </Panel>
           </Col>
           <Col md={8}>
             <Panel bordered header="Pending Quotes">
-              {" "}
-              <Placeholder.Paragraph width={320} rows={5} />
               {this.renderQuotesList()}
             </Panel>
           </Col>
           <Col md={8}>
             <Panel bordered header="New Leads">
-              {" "}
-              <Placeholder.Paragraph width={320} rows={5} />
               {this.renderLeadsList()}
             </Panel>
           </Col>
@@ -246,7 +307,6 @@ class Dashboard extends React.Component {
             <Content>{this.renderDashboardTabs()}</Content>
           </Container>
         </div>
-        {/* MEETING sidebar */}
       </div>
     );
   }

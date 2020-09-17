@@ -44,5 +44,30 @@ module.exports = (DB) => {
     }
   });
 
+  // GET /:id
+  router.post("/create", async (req, res) => {
+    try {
+      const {
+        departureDate,
+        returnDate,
+        travellers,
+        transport,
+        cost,
+      } = req.body;
+      // Fetch by User Id
+      const quotes = await Quote.create({
+        departureDate,
+        returnDate,
+        travellers,
+        transport,
+        cost,
+      });
+      res.json(quotes);
+    } catch (e) {
+      Error.setError("Error", 500, e);
+      Error.sendError(res);
+    }
+  });
+
   return router;
 };

@@ -25,7 +25,7 @@ module.exports = (DB) => {
   router.get("/", async (req, res) => {
     try {
       const tours = await Tour.findAll();
-      res.json(tours.get());
+      res.json(tours);
     } catch (e) {
       Error.setError("Error", 500, e);
       Error.sendError(res);
@@ -36,7 +36,7 @@ module.exports = (DB) => {
   router.get("/airports", async (_, res) => {
     try {
       const airports = await Airport.findAll();
-      res.json(airports.get());
+      res.json(airports);
     } catch (e) {
       Error.setError("Error", 500, e);
       Error.sendError(res);
